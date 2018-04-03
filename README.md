@@ -121,7 +121,7 @@ Publish the code with `awsmobile publish`.  Once the app has been published, ent
 * If required, click Verify and complete the verification process.
 * Choose **Save**.
 
-###Create a User Segment and Campaign
+### Create a User Segment and Campaign
 
 **TODO**: Instructions for setting up an email campaign.
 
