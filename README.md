@@ -110,6 +110,17 @@ Then look for `/* TODO: HANDLE FORM INPUT */` - this is where we need to add cod
 
 Publish the code with `awsmobile publish`.  Once the app has been published, enter your email address within the email sign-up form and click **Submit**.
 
+### Configure the Email Channel
+
+* Open the AWS Mobile Hub console, and select your project.
+* Choose **Analytics** (in the top-right corner).
+* Choose **Settings** (in the left-hand menu).
+* Choose **Channels** (along the top)
+* Choose **Email** > **Enable Email Channel**
+* Choose **Email Address**, enter your email address.
+* If required, click Verify and complete the verification process.
+* Choose **Save**.
+
 ###Create a User Segment and Campaign
 
 **TODO**: Instructions for setting up an email campaign.
