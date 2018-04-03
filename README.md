@@ -65,9 +65,12 @@ import * as Pinpoint from 'aws-sdk/clients/pinpoint';
 import awsConfig from '../aws-exports';
 ```
 
-Then look for `/* TODO: HANDLE FORM INPUT */` - this is where we need to add code to submit the email address into the Amazon Pinpoint analytics platform.  Replace the code that is there now with the following:
+Then look for `/* TODO: HANDLE FORM INPUT */` - this is where we need to add code to submit the email address into the Amazon Pinpoint analytics platform.  Replace the onEmailSubmitted() method that is there now with the following:
 
 ```
+  async onEmailSubmitted(event) {
+    event.preventDefault();
+
     /* TODO: HANDLE FORM INPUT */
     // Create a Pinpoint connection
     const credentials = await Auth.currentCredentials();
@@ -75,6 +78,8 @@ Then look for `/* TODO: HANDLE FORM INPUT */` - this is where we need to add cod
       region: awsConfig.aws_mobile_analytics_app_region,
       credentials: Auth.essentialCredentials(credentials)
     });
+    if (!this.endpointId)
+      this.endpointId = uuid.v4();
 
     // Create an endpoint definition
     const params = {
@@ -106,6 +111,7 @@ Then look for `/* TODO: HANDLE FORM INPUT */` - this is where we need to add cod
       }
     });
     /* END OF PINPOINT CHANGES */
+  }
 ```
 
 Publish the code with `awsmobile publish`.  Once the app has been published, enter your email address within the email sign-up form and click **Submit**.
@@ -121,9 +127,31 @@ Publish the code with `awsmobile publish`.  Once the app has been published, ent
 * If required, click Verify and complete the verification process.
 * Choose **Save**.
 
-### Create a User Segment and Campaign
+### Create a User Segment
 
-**TODO**: Instructions for setting up an email campaign.
+* Choose **Segments** (in the left-hand menu).
+* Choose **New segment**.
+* Give your segment a name like "Email List Users"
+* Fill in the form:
+	* **Build segment**.
+	* **Email**.
+	* App usage criteria: Have **used** the app **at least once**.
+        * Filter by user attributes: **emailsignup** > **true**.
+* Validate that the segment estimate is 1 user.
+* Choose **Create segment**.
+
+### Create an Email Campaign
+
+* Choose **Campaigns**
+* Choose **New campaign**
+* Name the campaign "New Email List Campaign", then choose **Next step**
+* Choose **Use a previously defined segment**
+* Select your segment, then choose **Next step**
+* Enter a subject and body, then choose **Next step**
+* Select **Immediate**, then choose **Next step**
+* Choose **Launch campaign**
+
+Check your email for your test message!
 
 ## Lesson 3: Authentication
 

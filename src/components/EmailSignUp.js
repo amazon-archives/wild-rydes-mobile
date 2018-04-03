@@ -24,13 +24,13 @@ class EmailSignUp extends React.Component {
     this.setState({ email: event.target.value.toLowerCase() });
   }
 
+  /* TODO: HANDLE FORM INPUT */
   onEmailSubmitted(event) {
     event.preventDefault();
 
-    /* TODO: HANDLE FORM INPUT */
     this.setState({ email: '', emailsubmitted: true });
-    /* END OF PINPOINT CHANGES */
   }
+  /* END OF PINPOINT CHANGES */
 
   render() {
     if (this.state.emailsubmitted) {
