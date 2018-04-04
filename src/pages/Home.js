@@ -124,7 +124,7 @@ const Home = () => {
       <header className="site-header">
         <h1 className="title">Wild Rydes</h1>
         <SiteNav/>
-        <Link className="home-button" to="/register">
+        <Link className="home-button" to="/app">
           Giddy Up!
         </Link>
       </header>

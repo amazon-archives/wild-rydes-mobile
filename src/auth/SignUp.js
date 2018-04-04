@@ -14,6 +14,7 @@
  */
 import React from 'react';
 import DynamicImage from '../components/DynamicImage';
+import { withRouter } from 'react-router-dom';
 
 import '../css/app.css';
 
@@ -26,6 +27,7 @@ class SignUp extends React.Component {
     this.state = {
       stage: 0,
       email: '',
+      phone: '',
       password: '',
       confirm: '',
       code: ''
@@ -34,6 +36,10 @@ class SignUp extends React.Component {
 
   onEmailChanged(e) {
     this.setState({ email: e.target.value.toLowerCase() });
+  }
+
+  onPhoneChanged(e) {
+    this.setState({ phone: e.target.value });
   }
 
   onPasswordChanged(e) {
@@ -57,7 +63,13 @@ class SignUp extends React.Component {
   onSubmitVerification(e) {
     e.preventDefault();
     console.log('Verification Submitted');
-    this.setState({ stage: 0, email: '', password: '', confirm: '', code: '' });
+    this.setState({ 
+      stage: 0, code: '',
+      email: '', phone: '', 
+      password: '', confirm: ''
+    });
+    // Go back to the home page
+    this.props.history.replace('/');
   }
 
   isValidEmail(email) {
@@ -79,6 +91,7 @@ class SignUp extends React.Component {
           <h1>Register</h1>
           <form id="registrationForm" onSubmit={(e) => this.onSubmitForm(e)}>
             <input className={isValidEmail?'valid':'invalid'} type="email" placeholder="Email" value={this.state.email} onChange={(e) => this.onEmailChanged(e)}/>
+            <input className='valid' type="phone" placeholder="Phone" value={this.state.phone} onChange={(e) => this.onPhoneChanged(e)}/>
             <input className={isValidPassword?'valid':'invalid'} type="password" placeholder="Password" value={this.state.password} onChange={(e) => this.onPasswordChanged(e)}/>
             <input className={isValidConfirmation?'valid':'invalid'} type="password" placeholder="Confirm Password" value={this.state.confirm} onChange={(e) => this.onConfirmationChanged(e)}/>
             <input disabled={!(isValidEmail && isValidPassword && isValidConfirmation)} type="submit" value="Let's Ryde"/>
@@ -120,4 +133,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);

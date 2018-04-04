@@ -163,31 +163,114 @@ awsmobile user-signin enable
 awsmobile push
 ```
 
-This will update the backend without publishing updated code.  Now, update the `src/auth/SignUp.js` file to do the sign-up process:
+This will update the backend without publishing updated code.  Now, update the `src/auth/SignUp.js` file to do the sign-up process.  First, add the appropriate import at the top of the file:
 
 ```
-/* Adjust the onSubmitForm() and onSubmitConfirmation() methods */
+import { Auth } from 'aws-amplify';
 ```
 
-Update the `src/auth/SignIn.js` file to do the sign-in process:
+Next, adjust the `onSubmitForm(e)` method:
 
 ```
-/* Adjust the onSubmitForm() and onSubmitMFA() methods */
+  async onSubmitForm(e) {
+    e.preventDefault();
+    try {
+      const params = {
+        username: this.state.email.replace(/[@.]/g, '|'),
+        password: this.state.password,
+        attributes: {
+          email: this.state.email,
+          phone_number: this.state.phone
+        },
+        validationData: []
+      };
+      const data = await Auth.signUp(params);
+      console.log(data);
+      this.setState({ stage: 1 });
+    } catch (err) {
+      alert(err.message);
+      console.error("Exception from Auth.signUp: ", err);
+      this.setState({ stage: 0, email: '', password: '', confirm: '' });
+    }
+  }
 ```
 
-Update the `src/auth/ForgotPassword.js` file to do the sign-in process:
+Adjust the `onSubmitVerification(e)` method:
 
 ```
-/* Adjust the onSubmitForm() and onSubmitConfirmation() methods */
+  async onSubmitVerification(e) {
+    e.preventDefault();
+    try {
+      const data = await Auth.confirmSignUp(
+        this.state.email.replace(/[@.]/g, '|'),
+        this.state.code
+      );
+      console.log(data);
+      // Go to the sign in page
+      this.props.history.replace('/signin');
+    } catch (err) {
+      alert(err.message);
+      console.error("Exception from Auth.confirmSignUp: ", err);
+      this.setStatate({ stage: 0, email: '', password: '', confirm: '', code: '' });
+    }
+  }
+```
+
+Update the `src/auth/SignIn.js` file to do the sign-in process.  First add the required import:
+
+```
+import { Auth } from 'aws-amplify';
+```
+
+Adjust the `onSubmitForm(e)` method:
+
+```
+  async onSubmitForm(e) {
+    e.preventDefault();
+    try {
+        const userObject = await Auth.signIn(
+            this.state.email.replace(/[@.]/g, '|'),
+            this.state.password
+        );
+        console.log('userObject = ', userObject);
+        this.setState({ userObject, stage: 1 });
+    } catch (err) {
+        alert(err.message);
+        console.error('Auth.signIn(): ', err);
+    }
+  }
+```
+
+Also, adjust the `onSubmitVerification(e)` method:
+
+```
+  async onSubmitVerification(e) {
+    e.preventDefault();
+    try {
+        const data = await Auth.confirmSignIn(
+            this.state.userObject,
+            this.state.code
+        );
+        console.log('data = ', data);
+        this.setState({ stage: 0, email: '', password: '', code: '' });
+        this.props.history.replace('/app');
+    } catch (err) {
+        alert(err.message);
+        console.error('Auth.confirmSignIn(): ', err);
+    }
+  }
 ```
 
 Finally, take a look at the route configuration in `src/index.js`.  We
 need to update so that the current authentication is read from local
-storage, then adjust the routing based on authentication.
+storage, then adjust the routing based on authentication.  We need to 
+read the current state of the authentication:
 
 ```
-/* Update the src/index.js */
+const isAuthenticated = () => Amplify.Auth.user != null;
 ```
+
+Run the app locally with `awsmobile run`.  You should be able to sign up (using the Apply link in the menu), or click **Giddy Up!** on the home page.  If you are already signed in, it will take you straight to the app.  Otherwise, it will ask you to sign-in first.
 
 Run the following to publish the new site:
 
@@ -195,4 +278,3 @@ Run the following to publish the new site:
 awsmobile publish -c -n -f
 ```
 
-This will ensure CloudFront is also flushed.  If in doubt, go to the S3 bucket instead.  You should now be able to click on the Ride! button and get a sign-up / sign-in button.  When signed-in, you should see the temporary Ride page.

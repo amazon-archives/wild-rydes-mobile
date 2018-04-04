@@ -13,9 +13,22 @@
  *  permissions and limitations under the License.
  */
 import React from 'react';
+import SiteNav from '../components/SiteNav';
+import SiteFooter from '../components/SiteFooter';
 
-class ForgotPassword extends React.Component {
+import '../css/main.css';
 
-}
+const MainApp = () => (
+  <div className="page-mainapp">
+    <header className="site-header">
+      <div className="site-logo dark">Wild Rydes</div>
+      <div className="row column medium-8 large-6 xlarge-5 xxlarge-4">
+        <h1 className="title">Main Application</h1>
+      </div>
+      <SiteNav/>
+    </header>
+    <SiteFooter/>
+  </div>
+);
 
-export default ForgotPassword;
+export default MainApp;

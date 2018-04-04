@@ -85,7 +85,8 @@
 
 .app input[type=text],
 .app input[type=password],
-.app input[type=email] {
+.app input[type=email],
+.app input[type=phone] {
     width: 100%;
     padding: 12px 0;
     margin: 10px 0 30px;

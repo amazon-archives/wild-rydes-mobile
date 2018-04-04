@@ -14,11 +14,21 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Home, FAQ, Investors, Unicorns } from './pages';
-import { SignUp } from './auth';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { Home, FAQ, Investors, MainApp, Unicorns } from './pages';
+import { SignIn, SignUp } from './auth';
 
 import 'normalize.css';
+
+const isAuthenticated = () => false; 
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={async (props) => (
+    isAuthenticated() === true
+      ? <Component {...props} />
+      : <Redirect to='/signin' />
+  )} />
+);
 
 class App extends React.Component {
   render() {
@@ -30,6 +40,8 @@ class App extends React.Component {
           <Route path="/investors" component={Investors} />
           <Route path="/unicorns" component={Unicorns} />
           <Route path="/register" component={SignUp} />
+	  <Route path="/signin" component={SignIn} />
+          <PrivateRoute path="/app" component={MainApp} />
         </Switch>
       </BrowserRouter>
     );
