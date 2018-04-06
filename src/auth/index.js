@@ -12,12 +12,10 @@
  *  express or implied. See the License for the specific language governing
  *  permissions and limitations under the License.
  */
-import ForgotPassword from './ForgotPassword';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
 export {
-    ForgotPassword,
     SignIn,
     SignUp
 };
