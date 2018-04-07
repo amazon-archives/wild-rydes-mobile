@@ -6,13 +6,23 @@ import Investors from './Investors'
 
 import { DrawerNavigator } from 'react-navigation'
 
-const routeConfig = {
+import { colors, fonts } from '../theme'
+
+const routes = {
+  FAQ: { screen: FAQ },
   Investors: { screen: Investors },
   Home: { screen: Home },
   MeetTheUnicorns: { screen: MeetTheUnicorns },
-  FAQ: { screen: FAQ },
   Apply: { screen: Apply },
-  
 }
 
-export default DrawerNavigator(routeConfig)
+const routeConfig = {
+  contentOptions: {
+    labelStyle: {
+      fontFamily: fonts.bold
+    },
+    activeTintColor: colors.pink
+  }
+}
+
+export default DrawerNavigator(routes, routeConfig)
