@@ -14,16 +14,7 @@ import Footer from '../components/Footer'
 
 import { colors, dimensions, fonts } from '../theme'
 
-const headerBg = require('../assets/images/wr-investors-header.png')
-const logoBlack = require('../assets/images/wr-logo-black.png')
-const pcp = require('../assets/images/wr-investors-pcp.png')
-const awesome = require('../assets/images/wr-investors-awesome.png')
-const barn = require('../assets/images/wr-investors-thebarn.png')
-const investor1 = require('../assets/images/wr-investors-1.png')
-const investor2 = require('../assets/images/wr-investors-2.png')
-const investor3 = require('../assets/images/wr-investors-3.png')
-const investor4 = require('../assets/images/wr-investors-4.png')
-const investor5 = require('../assets/images/wr-investors-5.png')
+import * as Images from '../assets/images'
 
 class Investors extends React.Component {
   render() {
@@ -31,15 +22,15 @@ class Investors extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <ImageBackground
-          source={headerBg}
+          source={Images.investorsHeaderBg}
           style={{ alignItems: 'center' }}
         >
-          <Image resizeMode='contain' source={logoBlack} style={styles.logo} />
+          <Image resizeMode='contain' source={Images.logoBlack} style={styles.logo} />
           <Text style={styles.title}>BACKED BY TOP DECILE INVESTORS</Text>
           <Text style={styles.subtitle}>We would not be anywhere without our trusted investors. We thank each of them for where we are today.</Text>
           
           <Image
-            source={pcp}
+            source={Images.pcp}
             resizeMode='contain'
             style={styles.investorCoImage}
           />
@@ -48,7 +39,7 @@ class Investors extends React.Component {
           <Text style={styles.investorCoSubtitle}>PCPNCTC was formed in 2008 to hold the telecommunications services, media, and IT businesses of Penglai Communications and Post LTD, a multinational mass media and telecommunications company. PCPL provides broadband subscription television services, fixed telephone, and mobile telephone across 20 countries and 3 continents.</Text>
 
           <Image
-            source={awesome}
+            source={Images.awesome}
             resizeMode='contain'
             style={styles.investorCoImage}
           />
@@ -57,7 +48,7 @@ class Investors extends React.Component {
           <Text style={styles.investorCoSubtitle}>What makes us awesome sauce and not your typical venture firm? Backed by over three decades of experience and partnering successfully with entrepreneurs, Tenderloin Capital was founded to serve the needs of early-stage founders. It’s not just our experience that sets us apart; we relate to our entrepreneurs as people, not just as investments. Tenderloin Capital backs entrepreneurs who are building market-disrupting social-mobile-local-machine learned-artificially-intelligent cognitive experiences.</Text>
 
           <Image
-            source={barn}
+            source={Images.barn}
             resizeMode='contain'
             style={styles.investorCoImage}
           />
@@ -71,7 +62,7 @@ class Investors extends React.Component {
           <Text style={styles.investorCoSubtitle}>The Barn is an institution for primarily incubating chicken eggs as well as the next revolutions in precision agriculture technology. The Barn created the industry defining model for funding sustainable, humane, non-GMO, and fairtrade early stage businesses in animal husbandry. We look forward to working with you.</Text>
 
           <ImageBackground
-            source={investor1}
+            source={Images.investor1}
             style={styles.boardImage}
           >
             <Text style={styles.boardTitle}>DR. TIM WAGNER</Text>
@@ -79,7 +70,7 @@ class Investors extends React.Component {
           </ImageBackground>
 
           <ImageBackground
-            source={investor2}
+            source={Images.investor2}
             style={styles.boardImage}
           >
             <Text style={styles.boardTitle}>VAUGHN R. NICHOLSON</Text>
@@ -87,7 +78,7 @@ class Investors extends React.Component {
           </ImageBackground>
 
           <ImageBackground
-            source={investor3}
+            source={Images.investor3}
             style={styles.boardImage}
           >
             <Text style={styles.boardTitle}>CONWAY BULLE</Text>
@@ -95,7 +86,7 @@ class Investors extends React.Component {
           </ImageBackground>
 
           <ImageBackground
-            source={investor4}
+            source={Images.investor4}
             style={styles.boardImage}
           >
             <Text style={styles.boardTitle}>DR. SAMANTHA WALLEFORD, PHD</Text>
@@ -103,7 +94,7 @@ class Investors extends React.Component {
           </ImageBackground>
 
           <ImageBackground
-            source={investor5}
+            source={Images.investor5}
             style={styles.boardImage}
           >
             <Text style={styles.boardTitle}>QILIN FEI</Text>

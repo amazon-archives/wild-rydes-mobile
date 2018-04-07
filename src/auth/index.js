@@ -9,10 +9,10 @@ import { DrawerNavigator } from 'react-navigation'
 import { colors, fonts } from '../theme'
 
 const routes = {
-  FAQ: { screen: FAQ },
-  Investors: { screen: Investors },
   Home: { screen: Home },
   MeetTheUnicorns: { screen: MeetTheUnicorns },
+  Investors: { screen: Investors },
+  FAQ: { screen: FAQ },
   Apply: { screen: Apply },
 }
 

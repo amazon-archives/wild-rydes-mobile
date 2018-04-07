@@ -15,11 +15,7 @@ import WhiteSpace from '../components/WhiteSpace'
 
 import { colors, fonts, dimensions } from '../theme'
 
-const headerBg = require('../assets/images/wr-unicorn-header.png')
-const logoBlack = require('../assets/images/wr-logo-black.png')
-const unicorn1 = require('../assets/images/wr-unicorn-one.png')
-const unicorn2 = require('../assets/images/wr-unicorn-two.png')
-const unicorn3 = require('../assets/images/wr-unicorn-three.png')
+import * as Images from '../assets/images'
 
 class MeetTheUnicorns extends React.Component {
   render() {
@@ -30,10 +26,10 @@ class MeetTheUnicorns extends React.Component {
         style={styles.container}
       >
         <ImageBackground
-          source={headerBg}
+          source={Images.unicornHeaderBg}
           style={styles.headerBg}
         >
-          <Image source={logoBlack} />
+          <Image source={Images.logoBlack} />
           <Text style={styles.headerTitle}>UNICORNS ARE OUR FRIENDS</Text>
         </ImageBackground>
 
@@ -46,7 +42,7 @@ class MeetTheUnicorns extends React.Component {
         <Text style={styles.italicText}>Meet a few of the unicorns that are part of our family.</Text>
 
         <Image
-          source={unicorn1}
+          source={Images.unicorn1}
           style={styles.centerImage}
           resizeMode='contain'
         />
@@ -56,7 +52,7 @@ class MeetTheUnicorns extends React.Component {
         <Text style={styles.unicornDescription}>Bucephalus joined Wild Rydes in February 2016 and has been giving rydes almost daily. He says he most enjoys getting to know each of his ryders, which makes the job more interesting for him. In his spare time, Bucephalus enjoys watching sunsets and playing Pokemon Go.</Text>
 
         <Image
-          source={unicorn2}
+          source={Images.unicorn2}
           style={styles.centerImage}
           resizeMode='contain'
         />
@@ -66,7 +62,7 @@ class MeetTheUnicorns extends React.Component {
         <Text style={styles.unicornDescription}>Shadowfox joined Wild Rydes after completing a distinguished career in the military, where he toured the world in many critical missions. Shadowfox enjoys impressing his ryders with magic tricks that he learned from his previous owner.</Text>
 
         <Image
-          source={unicorn3}
+          source={Images.unicorn3}
           style={[styles.centerImage, { margin: 20 }]}
           resizeMode='contain'
         />

@@ -18,29 +18,14 @@ import Paragraph from '../components/Paragraph'
 import WhiteSpace from '../components/WhiteSpace'
 import Footer from '../components/Footer'
 
-const headerBg = require('../assets/images/wr-home-top.jpg')
-const download = require('../assets/images/wr-home-block-1.png')
-const unicorn = require('../assets/images/wr-home-block-2.png')
-const price = require('../assets/images/wr-home-block-3.png')
-const success = require('../assets/images/wr-home-block-4.png')
-const footerBg = require('../assets/images/wr-home-about.jpg')
-const appIcon = require('../assets/images/wr-home-w.png')
-const apple = require('../assets/images/wr-home-apple.png')
-const google = require('../assets/images/wr-home-google.png')
-const facebook = require('../assets/images/wr-home-facebook.png')
-const instagram = require('../assets/images/wr-home-instagram.png')
-const twitter = require('../assets/images/wr-home-twitter.png')
-const wechat = require('../assets/images/wr-home-wechat.png')
-const weibo = require('../assets/images/wr-home-weibo.png')
-const quoteBg = require('../assets/images/wr-home-quote.jpg')
-const kracken = require('../assets/images/wr-home-kraken.png')
+import * as Images from '../assets/images'
 
 class Home extends React.Component {
   state = {
     greeting: 'SIGN UP'
   }
   signUp = () => {
-    console.log('something')
+    this.props.navigation.navigate('Apply')
   }
   onChangeText = (key, value) => {
     this.setState({
@@ -56,7 +41,7 @@ class Home extends React.Component {
         style={styles.container}
       >
         <Image
-          source={headerBg}
+          source={Images.headerBg}
           style={styles.headerImage}
         />
         <View style={styles.buttonContainer}>
@@ -71,7 +56,7 @@ class Home extends React.Component {
         <Paragraph content={p1} />
 
         <Image
-          source={download}
+          source={Images.download}
           resizeMode='contain'
           style={styles.centerImage}
         />
@@ -79,7 +64,7 @@ class Home extends React.Component {
         <Paragraph content={p2} />
 
         <Image
-          source={unicorn}
+          source={Images.unicorn}
           resizeMode='contain'
           style={styles.centerImage}
         />
@@ -87,7 +72,7 @@ class Home extends React.Component {
         <Paragraph content={p3} />
 
         <Image
-          source={price}
+          source={Images.price}
           resizeMode='contain'
           style={styles.centerImage}
         />
@@ -95,7 +80,7 @@ class Home extends React.Component {
         <Paragraph content={p4} />
 
         <Image
-          source={success}
+          source={Images.success}
           resizeMode='contain'
           style={styles.centerImage}
         />
@@ -106,7 +91,7 @@ class Home extends React.Component {
 
         <ImageBackground
           style={styles.ourStoryContainer}
-          source={footerBg}
+          source={Images.footerBg}
         >
           <Title title='OUR STORY' />
           <Paragraph content={p6} />
@@ -117,7 +102,7 @@ class Home extends React.Component {
           <Image
             style={styles.appIcon}
             resizeMode='contain'
-            source={appIcon}
+            source={Images.appIcon}
           />
           <Title
             title={this.state.greeting}
@@ -139,22 +124,22 @@ class Home extends React.Component {
           </TouchableOpacity>
 
           <View style={styles.appIconContainer}>
-            <Image source={apple} />
-            <Image source={google} />
+            <Image source={Images.apple} />
+            <Image source={Images.google} />
           </View>
 
           <View style={styles.socialContainer}>
-            <Image source={facebook} style={styles.socialIcon} />
-            <Image source={instagram} style={styles.socialIcon} />
-            <Image source={twitter} style={styles.socialIcon} />
-            <Image source={wechat} style={styles.socialIcon} />
-            <Image source={weibo} style={styles.socialIcon} />
+            <Image source={Images.facebook} style={styles.socialIcon} />
+            <Image source={Images.instagram} style={styles.socialIcon} />
+            <Image source={Images.twitter} style={styles.socialIcon} />
+            <Image source={Images.wechat} style={styles.socialIcon} />
+            <Image source={Images.weibo} style={styles.socialIcon} />
           </View>
         </View>
 
         {/* Quote */}
         <ImageBackground
-          source={quoteBg}
+          source={Images.quoteBg}
           style={styles.quote}
         >
           <Title style={styles.quoteTitle} title={quote} />
@@ -165,11 +150,11 @@ class Home extends React.Component {
 
         {/* Kraken */}
         <View
-          source={kracken}
+          source={Images.kracken}
           style={styles.kracken}
         >
           <Image
-            source={kracken}
+            source={Images.kracken}
             resizeMode='contain'
             style={styles.krackenImage}
           />
