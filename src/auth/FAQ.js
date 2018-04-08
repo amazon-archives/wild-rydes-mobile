@@ -19,7 +19,7 @@ class FAQ extends React.Component {
   render() {
     const open = () => this.props.navigation.navigate('DrawerOpen')
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView bounces={false} style={styles.container}>
         
         <ImageBackground
           source={Images.faqHeader}

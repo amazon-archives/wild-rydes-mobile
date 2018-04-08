@@ -15,10 +15,12 @@ import {
 import { SwitchNavigator } from 'react-navigation'
 
 import AuthNav from './src/auth'
+import HomeNav from './src/home'
 
 const Nav = SwitchNavigator(
   {
-    AuthNav: AuthNav
+    AuthNav: AuthNav,
+    HomeNav: HomeNav
   },
   {
     initialRouteName: 'AuthNav'

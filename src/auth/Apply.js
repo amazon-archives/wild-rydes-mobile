@@ -32,6 +32,7 @@ class Apply extends React.Component {
   }
   confirmSignUp = () => {
     this.setState({ showConfirmation: false })
+    this.props.navigation.navigate('HomeNav')
   }
   render() {
     const open = () => this.props.navigation.navigate('DrawerOpen')
@@ -57,6 +58,8 @@ class Apply extends React.Component {
                   placeholder='Username'
                   onChangeText={val => this.onChangeText('username', val)}
                   selectionColor='white'
+                  autoCapitalize='none'
+                  autoCorrect={false}
                 />
                 <TextInput
                   placeholderTextColor='rgba(255, 255, 255, .6)'
@@ -64,6 +67,8 @@ class Apply extends React.Component {
                   placeholder='Email'
                   onChangeText={val => this.onChangeText('email', val)}
                   selectionColor='white'
+                  autoCapitalize='none'
+                  autoCorrect={false}
                 />
                 <TextInput
                   placeholderTextColor='rgba(255, 255, 255, .6)'
@@ -97,6 +102,8 @@ class Apply extends React.Component {
                   placeholder='Username'
                   onChangeText={val => this.onChangeText('username', val)}
                   selectionColor='white'
+                  autoCapitalize='none'
+                  autoCorrect={false}
                 />
                 <TextInput
                   placeholderTextColor='rgba(255, 255, 255, .6)'
