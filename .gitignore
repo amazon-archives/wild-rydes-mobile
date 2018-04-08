@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+# ios
+ios/build
+
 # testing
 /coverage
 
