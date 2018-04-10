@@ -13,22 +13,50 @@
  *  permissions and limitations under the License.
  */
 import React from 'react';
-import SiteNav from '../components/SiteNav';
-import SiteFooter from '../components/SiteFooter';
+import BaseMap from '../components/BaseMap';
+import { Auth } from 'aws-amplify';
+import '../css/ride.css';
 
-import '../css/main.css';
+class MainApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      authToken: null
+    };
+  }
 
-const MainApp = () => (
-  <div className="page-mainapp">
-    <header className="site-header">
-      <div className="site-logo dark">Wild Rydes</div>
-      <div className="row column medium-8 large-6 xlarge-5 xxlarge-4">
-        <h1 className="title">Main Application</h1>
+  async componentDidMount() {
+    const session = await Auth.currentSession();
+    console.log(`session = ${session.accessToken.jwtToken}`);
+    this.setState({ authToken: session.accessToken.jwtToken });
+  }
+
+  render() {
+    const hasApi = false;
+
+    const noApiBlock = (
+      <div className="configMessage">
+        <div className="backdrop"></div>
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">Successfully Authenticated!</h3>
+          </div>
+          <div className="panel-body">
+            <p>This page is not functional yet because there is no API configured.</p>
+            <p>Here is your authentication token:</p>
+            <p className="authToken">{this.state.authToken}</p>
+          </div>
+        </div>
       </div>
-      <SiteNav/>
-    </header>
-    <SiteFooter/>
-  </div>
-);
+    );
+
+    return (
+      <div>
+        <BaseMap/>
+        {!hasApi && noApiBlock}
+      </div>
+    );
+  }
+}
 
 export default MainApp;
