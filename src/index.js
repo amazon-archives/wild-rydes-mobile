@@ -23,7 +23,9 @@ import 'normalize.css';
 const isAuthenticated = () => false; 
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={async (props) => (
+  <Route
+    {...rest}
+    render={props => (
     isAuthenticated() === true
       ? <Component {...props} />
       : <Redirect to='/signin' />
@@ -40,7 +42,7 @@ class App extends React.Component {
           <Route path="/investors" component={Investors} />
           <Route path="/unicorns" component={Unicorns} />
           <Route path="/register" component={SignUp} />
-	  <Route path="/signin" component={SignIn} />
+	        <Route path="/signin" component={SignIn} />
           <PrivateRoute path="/app" component={MainApp} />
         </Switch>
       </BrowserRouter>
