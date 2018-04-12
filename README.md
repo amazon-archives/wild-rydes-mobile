@@ -168,19 +168,79 @@ awsmobile push
 This will update the backend without publishing updated code.  Now, update the `src/auth/SignUp.js` file to do the sign-up process:
 
 ```
-/* Adjust the onSubmitForm() and onSubmitConfirmation() methods */
+  async onSubmitForm(e) {
+    e.preventDefault();
+    try {
+      const params = {
+        username: this.state.email.replace(/[@.]/g, '|'),
+        password: this.state.password,
+        attributes: {
+          email: this.state.email,
+          phone_number: this.state.phone
+        },
+        validationData: []
+      };
+      const data = await Auth.signUp(params);
+      console.log(data);
+      this.setState({ stage: 1 });
+    } catch (err) {
+      alert(err.message);
+      console.error("Exception from Auth.signUp: ", err);
+      this.setState({ stage: 0, email: '', password: '', confirm: '' });
+    }
+  }
+
+  async onSubmitVerification(e) {
+    e.preventDefault();
+    try {
+      const data = await Auth.confirmSignUp(
+        this.state.email.replace(/[@.]/g, '|'),
+        this.state.code
+      );
+      console.log(data);
+      // Go to the sign in page
+      this.props.history.replace('/signin');
+    } catch (err) {
+      alert(err.message);
+      console.error("Exception from Auth.confirmSignUp: ", err);
+      this.setStatate({ stage: 0, email: '', password: '', confirm: '', code: '' });
+    }
+  }
 ```
 
 Update the `src/auth/SignIn.js` file to do the sign-in process:
 
 ```
-/* Adjust the onSubmitForm() and onSubmitMFA() methods */
-```
+  async onSubmitForm(e) {
+    e.preventDefault();
+    try {
+        const userObject = await Auth.signIn(
+            this.state.email.replace(/[@.]/g, '|'),
+            this.state.password
+        );
+        console.log('userObject = ', userObject);
+        this.setState({ userObject, stage: 1 });
+    } catch (err) {
+        alert(err.message);
+        console.error('Auth.signIn(): ', err);
+    }
+  }
 
-Update the `src/auth/ForgotPassword.js` file to do the sign-in process:
-
-```
-/* Adjust the onSubmitForm() and onSubmitConfirmation() methods */
+  async onSubmitVerification(e) {
+    e.preventDefault();
+    try {
+        const data = await Auth.confirmSignIn(
+            this.state.userObject,
+            this.state.code
+        );
+        console.log('data = ', data);
+        this.setState({ stage: 0, email: '', password: '', code: '' });
+        this.props.history.replace('/app');
+    } catch (err) {
+        alert(err.message);
+        console.error('Auth.confirmSignIn(): ', err);
+    }
+  }
 ```
 
 Finally, take a look at the route configuration in `src/index.js`.  We
@@ -188,7 +248,9 @@ need to update so that the current authentication is read from local
 storage, then adjust the routing based on authentication.
 
 ```
-/* Update the src/index.js */
+const isAuthenticated = () => Amplify.Auth.user !== null;
+
+
 ```
 
 Run the following to publish the new site:
