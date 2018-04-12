@@ -114,6 +114,8 @@ Then look for `/* TODO: HANDLE FORM INPUT */` - this is where we need to add cod
   }
 ```
 
+Change the function to "async" by adding async in the front of `onEmailSubmitted(event)`
+
 Publish the code with `awsmobile publish`.  Once the app has been published, enter your email address within the email sign-up form and click **Submit**.
 
 ### Configure the Email Channel
@@ -163,118 +165,90 @@ awsmobile user-signin enable
 awsmobile push
 ```
 
-This will update the backend without publishing updated code.  Now, update the `src/auth/SignUp.js` file to do the sign-up process.  First, add the appropriate import at the top of the file:
+This will update the backend without publishing updated code.  Now, update the `src/auth/SignUp.js` file to do the sign-up process:
 
 ```
-import { Auth } from 'aws-amplify';
+/* Adjust the onSubmitForm() and onSubmitConfirmation() methods */
 ```
 
-Next, adjust the `onSubmitForm(e)` method:
+Update the `src/auth/SignIn.js` file to do the sign-in process:
 
 ```
-  async onSubmitForm(e) {
-    e.preventDefault();
-    try {
-      const params = {
-        username: this.state.email.replace(/[@.]/g, '|'),
-        password: this.state.password,
-        attributes: {
-          email: this.state.email,
-          phone_number: this.state.phone
-        },
-        validationData: []
-      };
-      const data = await Auth.signUp(params);
-      console.log(data);
-      this.setState({ stage: 1 });
-    } catch (err) {
-      alert(err.message);
-      console.error("Exception from Auth.signUp: ", err);
-      this.setState({ stage: 0, email: '', password: '', confirm: '' });
-    }
-  }
+/* Adjust the onSubmitForm() and onSubmitMFA() methods */
 ```
 
-Adjust the `onSubmitVerification(e)` method:
+Update the `src/auth/ForgotPassword.js` file to do the sign-in process:
 
 ```
-  async onSubmitVerification(e) {
-    e.preventDefault();
-    try {
-      const data = await Auth.confirmSignUp(
-        this.state.email.replace(/[@.]/g, '|'),
-        this.state.code
-      );
-      console.log(data);
-      // Go to the sign in page
-      this.props.history.replace('/signin');
-    } catch (err) {
-      alert(err.message);
-      console.error("Exception from Auth.confirmSignUp: ", err);
-      this.setStatate({ stage: 0, email: '', password: '', confirm: '', code: '' });
-    }
-  }
-```
-
-Update the `src/auth/SignIn.js` file to do the sign-in process.  First add the required import:
-
-```
-import { Auth } from 'aws-amplify';
-```
-
-Adjust the `onSubmitForm(e)` method:
-
-```
-  async onSubmitForm(e) {
-    e.preventDefault();
-    try {
-        const userObject = await Auth.signIn(
-            this.state.email.replace(/[@.]/g, '|'),
-            this.state.password
-        );
-        console.log('userObject = ', userObject);
-        this.setState({ userObject, stage: 1 });
-    } catch (err) {
-        alert(err.message);
-        console.error('Auth.signIn(): ', err);
-    }
-  }
-```
-
-Also, adjust the `onSubmitVerification(e)` method:
-
-```
-  async onSubmitVerification(e) {
-    e.preventDefault();
-    try {
-        const data = await Auth.confirmSignIn(
-            this.state.userObject,
-            this.state.code
-        );
-        console.log('data = ', data);
-        this.setState({ stage: 0, email: '', password: '', code: '' });
-        this.props.history.replace('/app');
-    } catch (err) {
-        alert(err.message);
-        console.error('Auth.confirmSignIn(): ', err);
-    }
-  }
+/* Adjust the onSubmitForm() and onSubmitConfirmation() methods */
 ```
 
 Finally, take a look at the route configuration in `src/index.js`.  We
 need to update so that the current authentication is read from local
-storage, then adjust the routing based on authentication.  We need to 
-read the current state of the authentication:
+storage, then adjust the routing based on authentication.
 
 ```
-const isAuthenticated = () => Amplify.Auth.user != null;
+/* Update the src/index.js */
 ```
-
-Run the app locally with `awsmobile run`.  You should be able to sign up (using the Apply link in the menu), or click **Giddy Up!** on the home page.  If you are already signed in, it will take you straight to the app.  Otherwise, it will ask you to sign-in first.
 
 Run the following to publish the new site:
 
 ```
 awsmobile publish -c -n -f
 ```
+
+This will ensure CloudFront is also flushed.  If in doubt, go to the S3 bucket instead.  You should now be able to click on the Ride! button and get a sign-up / sign-in button.  When signed-in, you should see the temporary Ride page.
+
+## Lesson 4: Create a Serverless Backend
+
+First, create a DynamoDB table.  This can only be done on the console (creating a database on the command line also creates a CRUD API which is not desired in this instance):
+
+* Open the [AWS Mobile Hub Console](https://console.aws.amazon.com/mobilehub/home).
+* Choose your project.
+* Under **Add more backend features**, choose **NoSQL Database**.
+* Choose **Enable NoSQL**, then choose **Add Table**.
+* Choose **Custom**.  Fill in the presented form:
+  * Table name: **Rides**
+  * Permissions: **Public**
+  * Attributes:
+    * RideId / String / Partition Key
+* Choose **Create table**.
+* Confirm the table creation by choosing **Create table** again.
+
+Next, create the Cloud Logic API.  This can be done from the command line:
+
+```
+awsmobile pull
+awsmobile cloup-api enable --prompt
+```
+
+The `awsmobile pull` command will pull the current definition from the AWS Mobile Hub service.  This will include the definition of the DynamoDB table.  You can then continue by changing the current definition with the second `awsmobile` command.
+
+Select **Create a new API**.  This will prompt you for some information:
+
+* API Name: **requestUnicorn**
+* Restrict API Access to signed-in users? **Y**
+* HTTP Path Name: **/ride**
+* Lambda Function Name: **requestUnicorn**
+* Add another HTTP path name? **N**
+
+Once complete, copy `./server/requestUnicorn.js` to `./awsmobilejs/backend/cloud-api/requestUnicorn/app.js`.  This is the code that will be run in the serverless backend in response to the API request.
+
+Run `awsmobile push` to publish the backend changes to AWS.
+
+Finally, edit the `./src/pages/MainApp.js` page.  Adjust the getData() method to read as follows:
+
+```
+  async getData(pin) {
+    const body = {
+      PickupLocation: {
+        Longitude: pin.longitude,
+        Latitude: pin.latitude
+      }
+    };
+    return await API.post(apiName, apiPath, { body });
+  }
+```
+
+Publish the application using `awsmobile publish`.  Run the application (either locally or from the cloud), log in.  Click somewhere on the map to set the pickup location, then click Request to request the ride.
 
