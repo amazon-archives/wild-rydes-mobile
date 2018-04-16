@@ -243,6 +243,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontFamily: fonts.italic,
     backgroundColor: '#333',
+    color: 'rgba(255, 255, 255, .7)',
     height: 35,
     width: dimensions.width - 30,
     paddingLeft: 9
