@@ -23,3 +23,6 @@ awsmobile configure
 ```
 awsmobile init
 ```
+
+## Adding Email Signup
+

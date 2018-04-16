@@ -114,7 +114,7 @@ class Home extends React.Component {
           <TextInput
             placeholder='Enter your email address'
             placeholderTextColor='rgba(255, 255, 255, .4)'
-            onChangeText={val => this.onChangeText('email', value)}
+            onChangeText={val => this.onChangeText('email', val)}
             style={styles.emailInput}
           />
           <TouchableOpacity>
