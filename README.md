@@ -83,10 +83,10 @@ import { Auth } from 'aws-amplify'
 // update signUp method
 signUp = () => {
   const {
-    email: '',
-    username: '',
-    phone_number: '',
-    password: ''
+    email,
+    username,
+    phone_number,
+    password
   } = this.state
 
   Auth.signUp({
