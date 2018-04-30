@@ -126,9 +126,9 @@ import { Auth } from 'aws-amplify'
 signIn = () => {
   const { username, password } = this.state
   Auth.signIn(username, password)
-    .then(success => {
-      console.log('successful sign in!: ', success)
-      this.setState({ showConfirmation: true })
+    .then(user => {
+      console.log('successful sign in!: ', user)
+      this.setState({ showConfirmation: true, user })
     })
     .catch(err => {
       console.log('error signing in...: ', err)
@@ -137,8 +137,8 @@ signIn = () => {
 
 // update confirmSignIn method
 confirmsignIn = () => {
-  const { username, confirmationCode } = this.state
-  Auth.confirmSignIn(username, confirmationCode)
+  const { user, confirmationCode } = this.state
+  Auth.confirmSignIn(user, confirmationCode)
     .then(success => {
       console.log('success confirming sign in!: ', success)
       this.props.navigation.navigate('HomeNav')
