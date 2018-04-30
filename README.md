@@ -187,3 +187,5 @@ signUp = () => {
   this.props.navigation.navigate('Apply')
 }
 ```
+
+We'll record some more meaningful analytics once we add our ride request functionality.
