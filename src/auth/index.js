@@ -1,6 +1,7 @@
 import Home from './Home'
 import FAQ from './FAQ'
 import Apply from './Apply'
+import SignIn from './SignIn'
 import MeetTheUnicorns from './MeetTheUnicorns'
 import Investors from './Investors'
 
@@ -14,6 +15,7 @@ const routes = {
   Investors: { screen: Investors },
   FAQ: { screen: FAQ },
   Apply: { screen: Apply },
+  SignIn: { screen: SignIn }
 }
 
 const routeConfig = {

@@ -15,11 +15,9 @@ import Button from '../components/Button'
 import * as Images from '../assets/images'
 import { dimensions, fonts, colors } from '../theme'
 
-class Apply extends React.Component {
+class SignIn extends React.Component {
   state = {
-    email: '',
     username: '',
-    phone_number: '',
     password: '',
     confirmationCode: '',
     showConfirmation: false
@@ -27,12 +25,12 @@ class Apply extends React.Component {
   onChangeText = (key, value) => {
     this.setState({ [key]: value })
   }
-  signUp = () => {
+  signIn = () => {
     this.setState({ showConfirmation: true })
   }
-  confirmSignUp = () => {
+  confirmsignIn = () => {
     this.setState({ showConfirmation: false })
-    this.props.navigation.navigate('SignIn')
+    this.props.navigation.navigate('HomeNav')
   }
   render() {
     const open = () => this.props.navigation.navigate('DrawerOpen')
@@ -47,7 +45,7 @@ class Apply extends React.Component {
             style={styles.logo}
             source={Images.logoWhite}
           />
-          <Text style={styles.title}>REGISTER</Text>
+          <Text style={styles.title}>SIGN IN</Text>
 
           {
             !this.state.showConfirmation && (
@@ -64,29 +62,13 @@ class Apply extends React.Component {
                 <TextInput
                   placeholderTextColor='rgba(255, 255, 255, .6)'
                   style={styles.input}
-                  placeholder='Email'
-                  onChangeText={val => this.onChangeText('email', val)}
-                  selectionColor='white'
-                  autoCapitalize='none'
-                  autoCorrect={false}
-                />
-                <TextInput
-                  placeholderTextColor='rgba(255, 255, 255, .6)'
-                  style={styles.input}
                   placeholder='Password'
                   onChangeText={val => this.onChangeText('password', val)}
                   selectionColor='white'
                   secureTextEntry={true}
                 />
-                <TextInput
-                  placeholderTextColor='rgba(255, 255, 255, .6)'
-                  style={styles.input}
-                  placeholder='Phone Number'
-                  onChangeText={val => this.onChangeText('phone_number', val)}
-                  selectionColor='white'
-                />
                 <Button
-                  onPress={this.signUp}
+                  onPress={this.signIn}
                   containerStyle={styles.buttonContainer}
                   title="LET'S RYDE"
                 />
@@ -99,23 +81,14 @@ class Apply extends React.Component {
                 <TextInput
                   placeholderTextColor='rgba(255, 255, 255, .6)'
                   style={styles.input}
-                  placeholder='Username'
-                  onChangeText={val => this.onChangeText('username', val)}
-                  selectionColor='white'
-                  autoCapitalize='none'
-                  autoCorrect={false}
-                />
-                <TextInput
-                  placeholderTextColor='rgba(255, 255, 255, .6)'
-                  style={styles.input}
                   placeholder='Confirmation Code'
                   onChangeText={val => this.onChangeText('confirmationCode', val)}
                   selectionColor='white'
                 />
                 <Button
-                  onPress={this.confirmSignUp}
+                  onPress={this.confirmsignIn}
                   containerStyle={styles.buttonContainer}
-                  title="CONFIRM SIGNUP"
+                  title="CONFIRM SIGNIN"
                 />
               </View>
             )
@@ -163,4 +136,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Apply
+export default SignIn
