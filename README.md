@@ -94,7 +94,7 @@ signUp = () => {
     password,
     attributes: {
       email,
-      phone
+      phone_number
     }
   })
   .then(success => {
