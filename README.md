@@ -169,6 +169,8 @@ Analytics.record('Button Click', { eventType: 'ride requested' })
 Analytics.record('Button Click', { eventType: 'ride requested' }, { unicorn: 'Bucephalus' })
 ```
 
+### Recording an event
+
 Let's add a button that records the number of user's that click on the __GIDDY UP__ button to sign up for the app.
 
 In `Home.js`, let's add a new method and attach the method to the button press event:
