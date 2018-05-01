@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "aws-amplify":"^0.3.3",
     "esri-loader": "^2.2.0",
     "normalize.css": "^8.0.0",
     "react": "^16.2.0",
