@@ -6,6 +6,10 @@
 # testing
 /coverage
 
+# aws
+awsmobile
+src/aws-exports.js
+
 # production
 /build
 
