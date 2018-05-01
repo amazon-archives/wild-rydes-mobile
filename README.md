@@ -189,3 +189,57 @@ signUp = () => {
 ```
 
 We'll record some more meaningful analytics once we add our ride request functionality.
+
+## Lesson 3: Create a Serverless Backend
+
+First, create a DynamoDB table.  This can only be done on the console (creating a database on the command line also creates a CRUD API which is not desired in this instance):
+
+* Open the [AWS Mobile Hub Console](https://console.aws.amazon.com/mobilehub/home).
+* Choose your project.
+* Under **Add more backend features**, choose **NoSQL Database**.
+* Choose **Enable NoSQL**, then choose **Add Table**.
+* Choose **Custom**.  Fill in the presented form:
+  * Table name: **Rides**
+  * Permissions: **Public**
+  * Attributes:
+    * RideId / String / Partition Key
+* Choose **Create table**.
+* Confirm the table creation by choosing **Create table** again.
+
+Next, create the Cloud Logic API.  This can be done from the command line:
+
+```
+awsmobile pull
+awsmobile cloud-api enable --prompt
+```
+
+The `awsmobile pull` command will pull the current definition from the AWS Mobile Hub service.  This will include the definition of the DynamoDB table.  You can then continue by changing the current definition with the second `awsmobile` command.
+
+Select **Create a new API**.  This will prompt you for some information:
+
+* API Name: **requestUnicorn**
+* Restrict API Access to signed-in users? **Y**
+* HTTP Path Name: **/ride**
+* Lambda Function Name: **requestUnicorn**
+* Add another HTTP path name? **N**
+
+Once complete, copy `./server/requestUnicorn.js` to `./awsmobilejs/backend/cloud-api/requestUnicorn/app.js`.  This is the code that will be run in the serverless backend in response to the API request.
+
+Run `awsmobile push` to publish the backend changes to AWS.
+
+Finally, edit the `./src/pages/MainApp.js` page.  Adjust the getData() method to read as follows:
+
+```
+  async getData(pin) {
+    const body = {
+      PickupLocation: {
+        Longitude: pin.longitude,
+        Latitude: pin.latitude
+      }
+    };
+    return await API.post(apiName, apiPath, { body });
+  }
+```
+
+Publish the application using `awsmobile publish`.  Run the application (either locally or from the cloud), log in.  Click somewhere on the map to set the pickup location, then click Request to request the ride.
+
