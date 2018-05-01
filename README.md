@@ -259,7 +259,7 @@ Run the following to publish the new site:
 awsmobile publish -c -n -f
 ```
 
-This will ensure CloudFront is also flushed.  If in doubt, go to the S3 bucket instead.  You should now be able to click on the Ride! button and get a sign-up / sign-in button.  When signed-in, you should see the temporary Ride page.
+This will ensure CloudFront is also flushed.  If in doubt, go to the S3 bucket instead.  You should now be able to click on the Giddy Up! button and get a sign-up / sign-in button.  When signed-in, you should see the temporary Ride page.
 
 ## Lesson 4: Create a Serverless Backend
 
