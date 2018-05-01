@@ -281,7 +281,7 @@ Next, create the Cloud Logic API.  This can be done from the command line:
 
 ```
 awsmobile pull
-awsmobile cloup-api enable --prompt
+awsmobile cloud-api enable --prompt
 ```
 
 The `awsmobile pull` command will pull the current definition from the AWS Mobile Hub service.  This will include the definition of the DynamoDB table.  You can then continue by changing the current definition with the second `awsmobile` command.
