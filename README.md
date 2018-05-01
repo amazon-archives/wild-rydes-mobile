@@ -256,7 +256,7 @@ const isAuthenticated = () => Amplify.Auth.user !== null;
 Run the following to publish the new site:
 
 ```
-awsmobile publish -c -n -f
+awsmobile publish -c -f
 ```
 
 This will ensure CloudFront is also flushed.  If in doubt, go to the S3 bucket instead.  You should now be able to click on the Ride! button and get a sign-up / sign-in button.  When signed-in, you should see the temporary Ride page.
