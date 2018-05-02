@@ -60,6 +60,7 @@ class Apply extends React.Component {
                   selectionColor='white'
                   autoCapitalize='none'
                   autoCorrect={false}
+                  underlineColorAndroid='transparent'
                 />
                 <TextInput
                   placeholderTextColor='rgba(255, 255, 255, .6)'
@@ -69,6 +70,7 @@ class Apply extends React.Component {
                   selectionColor='white'
                   autoCapitalize='none'
                   autoCorrect={false}
+                  underlineColorAndroid='transparent'
                 />
                 <TextInput
                   placeholderTextColor='rgba(255, 255, 255, .6)'
@@ -77,6 +79,7 @@ class Apply extends React.Component {
                   onChangeText={val => this.onChangeText('password', val)}
                   selectionColor='white'
                   secureTextEntry={true}
+                  underlineColorAndroid='transparent'
                 />
                 <TextInput
                   placeholderTextColor='rgba(255, 255, 255, .6)'
@@ -84,6 +87,7 @@ class Apply extends React.Component {
                   placeholder='Phone Number'
                   onChangeText={val => this.onChangeText('phone_number', val)}
                   selectionColor='white'
+                  underlineColorAndroid='transparent'
                 />
                 <Button
                   onPress={this.signUp}
@@ -104,6 +108,7 @@ class Apply extends React.Component {
                   selectionColor='white'
                   autoCapitalize='none'
                   autoCorrect={false}
+                  underlineColorAndroid='transparent'
                 />
                 <TextInput
                   placeholderTextColor='rgba(255, 255, 255, .6)'
@@ -111,6 +116,7 @@ class Apply extends React.Component {
                   placeholder='Confirmation Code'
                   onChangeText={val => this.onChangeText('confirmationCode', val)}
                   selectionColor='white'
+                  underlineColorAndroid='transparent'
                 />
                 <Button
                   onPress={this.confirmSignUp}

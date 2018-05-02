@@ -12,6 +12,15 @@ ios/build
 # production
 /build
 
+#android
+android/.gradle/
+android/.idea/
+android/WildRidesReactNative.iml
+android/app/app.iml
+android/app/build/
+android/build/
+android/local.properties
+
 # misc
 .DS_Store
 .env.local
