@@ -4,24 +4,29 @@ Welcome to the Wild Rydes React Native project. In this project, we will take yo
 
 # Getting Started
 
-To get started, we'll need to create a new AWS Mobile project.
+To get started, we'll need to clone the repo and install the dependencies.
 
-1. Install the AWS Mobile CLI:    
+1. Clone the repo:
 
 ```bash
-npm i -g awsmobile-cli
+git clone https://github.com/aws-samples/wild-rydes-mobile.git
 ```
 
-2. Configure with your IAM credentials    
+2. Install the dependencies with NPM or Yarn
 
 ```bash
-awsmobile configure
+cd wild-rydes-mobile
+npm install
+// or
+yarn
 ```
 
-3. Create a new project   
+3. Run the project
 
 ```bash
-awsmobile init
+react-native run-ios
+// or
+react-native run-android
 ```
 
 ## Lesson 1: Authentication  
