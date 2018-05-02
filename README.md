@@ -258,6 +258,8 @@ Run `awsmobile push` to publish the backend changes to AWS.
 Next, we need to update the onPress method & getData method to fetch a ride from the API & update the state with the data returned from the API:
 
 ```js
+// src/home/HailRide.js
+
 // update getData method with the following code
 async getData() {
   const { pin } = this.state
