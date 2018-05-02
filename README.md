@@ -155,6 +155,25 @@ confirmsignIn = () => {
 }
 ```
 
+### Automatically sign in user on app refresh
+
+Once the user is logged in, we want to be able to check AsyncStorage to see if the user is still available, and if so autmoatically log them in.
+
+To do so, we can call `Auth.currentAuthenticatedUser`, and if this call returns successfully we can log them in automratically:
+
+```js
+// import Auth from amplify in imports
+import { Auth } from 'aws-amplify'
+
+// make call in componentDidMount
+componentDidMount() {
+  Auth.currentAuthenticatedUser()
+    .then(success => this.props.navigation.navigate('HomeNav'))
+    .catch(err => console.log('not signed in...', err))
+}
+
+```
+
 ## Lesson 2: Analytics
 
 Now we want to begin recording events informing us about what the user is doing in the app, and how they are interacting with our app.
@@ -234,20 +253,6 @@ Once complete, copy `./server/requestUnicorn.js` to `./awsmobilejs/backend/cloud
 
 Run `awsmobile push` to publish the backend changes to AWS.
 
-Finally, edit the `./src/pages/MainApp.js` page.  Adjust the getData() method to read as follows:
-
-```
-  async getData(pin) {
-    const body = {
-      PickupLocation: {
-        Longitude: pin.longitude,
-        Latitude: pin.latitude
-      }
-    };
-    return await API.post(apiName, apiPath, { body });
-  }
-```
-
 ### Updating the client code
 
 Next, we need to update the onPress method & getData method to fetch a ride from the API & update the state with the data returned from the API:
@@ -255,6 +260,7 @@ Next, we need to update the onPress method & getData method to fetch a ride from
 ```js
 // update getData method with the following code
 async getData() {
+  const { pin } = this.state
   const body = {
     PickupLocation: {
       Longitude: pin.longitude,
