@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 
 import { colors, fonts } from '../theme'
-import { Auth, API } from 'aws-amplify'
+import { Analytics, Auth, API } from 'aws-amplify'
 
 const apiName = 'requestUnicorn';
 const apiPath = '/ride';

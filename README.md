@@ -54,7 +54,7 @@ awsmobile configure
 ```bash
 awsmobile init
 ```
-_Here you can accept defaults for all options, or specify your project name_  
+_Here should set __src__ as the project's source directory & accept defaults for all other options, or specify your project name if you would like to_
 <br />
 
 4. Now, we need to add User SignIn capabilities. We can do this with the `awsmobile <featurename> enable` command. This will automatically create a new Cognito configuration for us.
@@ -297,3 +297,12 @@ async onPress() {
 
 Publish the application using `awsmobile publish`.  Run the application (either locally or from the cloud), log in.  Click somewhere on the map to set the pickup location, then click Request to request the ride.
 
+### Tracking a metric
+
+Now, let's try to track the unicorn that has picked us up to see how many times he or she is called!
+
+In the onPress method, let's add the following line:
+
+```
+Analytics.record('Unicorn requested', { unicornName: data.Unicorn.Name })
+```
