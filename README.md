@@ -192,6 +192,8 @@ We'll record some more meaningful analytics once we add our ride request functio
 
 ## Lesson 3: Create a Serverless Backend
 
+### Creating the backend
+
 First, create a DynamoDB table.  This can only be done on the console (creating a database on the command line also creates a CRUD API which is not desired in this instance):
 
 * Open the [AWS Mobile Hub Console](https://console.aws.amazon.com/mobilehub/home).
@@ -239,6 +241,53 @@ Finally, edit the `./src/pages/MainApp.js` page.  Adjust the getData() method to
     };
     return await API.post(apiName, apiPath, { body });
   }
+```
+
+### Updating the client code
+
+Next, we need to update the onPress method & getData method to fetch a ride from the API & update the state with the data returned from the API:
+
+```js
+// update getData method with the following code
+async getData() {
+  const body = {
+    PickupLocation: {
+      Longitude: pin.longitude,
+      Latitude: pin.latitude
+    }
+  };
+  return await API.post(apiName, apiPath, { body });
+}
+
+// update onPress method with the following code
+async onPress() {
+  const updates = ['Requesting Unicorn...']
+  try {
+    this.setState({
+      requestRideEnabled: false,
+      updates
+    });
+    const data = await this.getData(this.state.pin);
+    console.log('data from API: ', data);
+    updates.push(`Your unicorn, ${data.Unicorn.Name} will be with you in ${data.Eta} seconds`);
+    this.setState({ updates });
+
+    // Let's fake the arrival
+    setTimeout(() => {
+      console.log('ride complete');
+      const updateList = this.state.updates;
+      updateList.push([ `${data.Unicorn.Name} has arrived` ]);
+      this.setState({
+        updates: updateList,
+        requestRideEnabled: true,
+      });
+    }, data.Eta * 1000);
+  } catch (err) {
+    console.error(err);
+    updates.push([ 'Error finding unicorn' ]);
+    this.setState({ updates });
+  }
+}
 ```
 
 Publish the application using `awsmobile publish`.  Run the application (either locally or from the cloud), log in.  Click somewhere on the map to set the pickup location, then click Request to request the ride.
