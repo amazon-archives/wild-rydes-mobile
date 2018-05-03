@@ -109,6 +109,7 @@ class Apply extends React.Component {
                   autoCapitalize='none'
                   autoCorrect={false}
                   underlineColorAndroid='transparent'
+                  value={this.state.username}
                 />
                 <TextInput
                   placeholderTextColor='rgba(255, 255, 255, .6)'
