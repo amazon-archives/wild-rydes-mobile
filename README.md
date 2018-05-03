@@ -203,7 +203,7 @@ Analytics.record('Button Click', { eventType: 'ride requested' }, { unicorn: 'Bu
 
 ### Recording an event
 
-Let's add an event that tracks when a user attempts to sign up but has an erro.
+Let's add an event that tracks when a user attempts to sign up but has an error.
 
 In __src/auth/Apply.js__, let's add the new tracking functionality to the `signUp` method in the `.catch` statement of `Auth.signUp`:
 
