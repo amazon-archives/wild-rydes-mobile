@@ -220,7 +220,7 @@ This will update the backend without publishing updated code.  Now, update the `
     } catch (err) {
       alert(err.message);
       console.error("Exception from Auth.confirmSignUp: ", err);
-      this.setStatate({ stage: 0, email: '', password: '', confirm: '', code: '' });
+      this.setState({ stage: 0, email: '', password: '', confirm: '', code: '' });
     }
   }
 ```
