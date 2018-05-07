@@ -2,6 +2,23 @@
 
 Welcome to the Wild Rydes Mobile project.  In this project, we will take you through the steps necessary to build a complete website with analytics, authentication, email list sign-up and booking of a ride.
 
+## Getting Started
+
+To continue with this course, you must first have the AWS Mobile CLI installed and configured:   
+
+1. Install the CLI   
+
+```
+npm i -g awsmobile-cli
+```
+
+2. Configure the CLI   
+
+```
+awsmobile configure
+```
+
+
 ## Lesson 1: Web Hosting
 
 The design team has dropped the final version of the web site, but has not set up web hosting.  In this lesson, we will quickly set up a scalable web site with global reach and deploy the code to the web site.
