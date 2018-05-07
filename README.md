@@ -185,6 +185,10 @@ awsmobile push
 This will update the backend without publishing updated code.  Now, update the `src/auth/SignUp.js` file to do the sign-up process:
 
 ```
+import { Auth } from 'aws-amplify';
+```
+
+```
   async onSubmitForm(e) {
     e.preventDefault();
     try {
