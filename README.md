@@ -317,6 +317,8 @@ awsmobile pull
 awsmobile cloud-api enable --prompt
 ```
 
+When asked `sync corresponding contents in backend/ with #current-backend-info`? choose `y`   
+
 The `awsmobile pull` command will pull the current definition from the AWS Mobile Hub service.  This will include the definition of the DynamoDB table.  You can then continue by changing the current definition with the second `awsmobile` command.
 
 Select **Create a new API**.  This will prompt you for some information:

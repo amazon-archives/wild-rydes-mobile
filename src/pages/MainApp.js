@@ -56,9 +56,9 @@ class MainApp extends React.Component {
    * @return {Boolean} true if API is configured
    */
   hasApi() {
-    const api = awsConfig.aws_cloud_logic_custom
-      .filter(v => v.name === 'requestUnicorn');
-    return (typeof api !== 'undefined');
+    // const api = awsConfig.aws_cloud_logic_custom
+    //   .filter(v => v.name === 'requestUnicorn');
+    // return (typeof api !== 'undefined');
   }
 
   /**
