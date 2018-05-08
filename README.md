@@ -171,8 +171,7 @@ Publish the code with `awsmobile publish`.  Once the app has been published, ent
 * Fill in the form:
 	* **Build segment**.
 	* **Email**.
-	* App usage criteria: Have **used** the app **at least once**.
-        * Filter by user attributes: **emailsignup** > **true**.
+  * Filter by user attributes: **emailsignup** > **true**.
 * Validate that the segment estimate is 1 user.
 * Choose **Create segment**.
 
