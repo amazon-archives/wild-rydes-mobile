@@ -25,12 +25,49 @@ class EmailSignUp extends React.Component {
   }
 
   /* TODO: HANDLE FORM INPUT */
-  onEmailSubmitted(event) {
+  async onEmailSubmitted(event) {
     event.preventDefault();
 
-    this.setState({ email: '', emailsubmitted: true });
+    // Create a Pinpoint connection
+    const credentials = await Auth.currentCredentials();
+    const pinpointClient = new Pinpoint({
+      region: awsConfig.aws_mobile_analytics_app_region,
+      credentials: Auth.essentialCredentials(credentials)
+    });
+    if (!this.endpointId)
+      this.endpointId = uuid.v4();
+
+    // Create an endpoint definition
+    const params = {
+      ApplicationId: awsConfig.aws_mobile_analytics_app_id,
+      EndpointId: this.endpointId,
+      EndpointRequest: {
+        Address: this.state.email,
+        ChannelType: 'EMAIL',
+        EffectiveDate: new Date().toISOString(),
+        OptOut: 'NONE',
+        RequestId: uuid.v4(),
+        User: {
+          UserAttributes: {
+            email: [ this.state.email ],
+            emailsignup: [ 'true' ]
+          },
+          UserId: this.state.email
+        }
+      }
+    };
+
+    // Update the endpoint definition
+    pinpointClient.updateEndpoint(params, (err, data) => {
+      if (err) {
+        alert('Email Signup Failed');
+        console.error('updateEndpoint: ', err);
+      } else {
+        this.setState({ email: '', emailsubmitted: true });
+      }
+    });
+    /* END OF PINPOINT CHANGES */
   }
-  /* END OF PINPOINT CHANGES */
 
   render() {
     if (this.state.emailsubmitted) {
