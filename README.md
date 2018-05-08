@@ -23,13 +23,27 @@ awsmobile configure
 
 The design team has dropped the final version of the web site, but has not set up web hosting.  In this lesson, we will quickly set up a scalable web site with global reach and deploy the code to the web site.
 
-Download and run the project locally:
+Clone the project & change into the directory:
 
 ```
 git clone https://github.com/aws-samples/wild-rydes-mobile
 cd wild-rydes-mobile
-yarn install
+```
+
+Install the dependencies using npm or yarn:
+
+```
+yarn
+or
+npm install
+```
+
+Run the project locally using either npm or yarn:   
+
+```
 yarn start
+or
+npm start
 ```
 
 To build the website in the cloud:
