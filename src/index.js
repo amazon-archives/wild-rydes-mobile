@@ -20,6 +20,11 @@ import { SignIn, SignUp } from './auth';
 
 import 'normalize.css';
 
+import Amplify from 'aws-amplify';
+import awsConfig from './aws-exports';
+
+Amplify.configure(awsConfig);
+
 const isAuthenticated = () => false; 
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
