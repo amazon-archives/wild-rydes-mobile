@@ -74,7 +74,30 @@ awsmobile publish
 
 A browser will open pointing to the newly created site once publication completes.
 
-## Lesson 2: Email Campaign
+## Lesson 2: Analytics & Email Campaign
+
+### Part 1. Analytics   
+
+Record path name as user navigates:
+
+```js
+// src/index.js
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  Analytics.record('route path: ', { routeName: rest.path }) 
+  return (
+    <Route
+      {...rest}
+      render={props => (
+      isAuthenticated() === true
+        ? <Component {...props} />
+        : <Redirect to='/signin' />
+    )} />
+  )
+};
+
+```
+
+### Part 2. 
 
 One of the features on the home page is an email sign-up page.  In this lesson, you will link the email sign-up to Amazon Pinpoint, then use the Amazon Pinpoint user segmentation and campaigns features to send an email to all the registered users.
 

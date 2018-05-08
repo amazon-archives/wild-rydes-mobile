@@ -22,15 +22,18 @@ import 'normalize.css';
 
 const isAuthenticated = () => false; 
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => (
-    isAuthenticated() === true
-      ? <Component {...props} />
-      : <Redirect to='/signin' />
-  )} />
-);
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  // analytics logic goes here
+  return (
+    <Route
+      {...rest}
+      render={props => (
+      isAuthenticated() === true
+        ? <Component {...props} />
+        : <Redirect to='/signin' />
+    )} />
+  )
+};
 
 class App extends React.Component {
   render() {
