@@ -81,6 +81,9 @@ A browser will open pointing to the newly created site once publication complete
 Record path name as user navigates:
 
 ```js
+// import Analytics
+import Amplify, { Analytics } from 'aws-amplify'
+
 // src/index.js
 const PrivateRoute = ({ component: Component, ...rest }) => {
   Analytics.record('route path: ', { routeName: rest.path }) 
