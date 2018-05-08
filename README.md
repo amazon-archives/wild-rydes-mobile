@@ -106,7 +106,6 @@ Then look for `/* TODO: HANDLE FORM INPUT */` - this is where we need to add cod
   async onEmailSubmitted(event) {
     event.preventDefault();
 
-    /* TODO: HANDLE FORM INPUT */
     // Create a Pinpoint connection
     const credentials = await Auth.currentCredentials();
     const pinpointClient = new Pinpoint({
