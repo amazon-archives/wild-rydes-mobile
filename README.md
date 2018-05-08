@@ -46,7 +46,7 @@ or
 npm start
 ```
 
-To build the website in the cloud:
+__Create the new Mobile Hub project__
 
 ```
 awsmobile init
@@ -60,7 +60,11 @@ For the questions:
 * What is your project's start command for local test run: (npm run-script start) **yarn start**
 * What awsmobile project name would you like to use: (wild-rydes-mobile-2018-03-09-14-57-35) **wild-rydes-mobile**
 
-The AWS Mobile Hub project will be created in the cloud.  Use the following to build and publish the project to the cloud:
+The AWS Mobile Hub project will be create.
+
+__To build the website in the cloud:__
+
+Use the following to build and publish the project to the cloud:
 
 ```
 awsmobile publish
