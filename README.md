@@ -20,6 +20,7 @@ To build the website in the cloud:
 ```
 awsmobile init
 ```
+When asked `create the new backend with default features or specified features` choose `default features`
 
 For the questions:
 
