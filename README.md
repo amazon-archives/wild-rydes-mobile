@@ -38,14 +38,6 @@ or
 npm install
 ```
 
-Run the project locally using either npm or yarn:   
-
-```
-yarn start
-or
-npm start
-```
-
 __Create the new Mobile Hub project__
 
 ```
@@ -60,7 +52,17 @@ For the questions:
 * What is your project's start command for local test run: (npm run-script start) **yarn start**
 * What awsmobile project name would you like to use: (wild-rydes-mobile-2018-03-09-14-57-35) **wild-rydes-mobile**
 
-The AWS Mobile Hub project will be create.
+The AWS Mobile Hub project will be created.
+
+__To run the projecte locally:__
+
+Run the project locally using either npm or yarn: 
+
+```
+yarn start
+or
+npm start
+```
 
 __To build the website in the cloud:__
 
