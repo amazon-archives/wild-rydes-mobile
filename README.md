@@ -333,6 +333,15 @@ Once complete, copy `./server/requestUnicorn.js` to `./awsmobilejs/backend/cloud
 
 Run `awsmobile push` to publish the backend changes to AWS.
 
+Next, edit the hasApi method and uncomment the code:
+
+```
+hasApi() {
+  const api = awsConfig.aws_cloud_logic_custom.filter(v => v.name === 'requestUnicorn');
+  return (typeof api !== 'undefined');
+}
+```
+
 Finally, edit the `./src/pages/MainApp.js` page.  Adjust the getData() method to read as follows:
 
 ```
