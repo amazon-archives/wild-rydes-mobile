@@ -78,6 +78,15 @@ A browser will open pointing to the newly created site once publication complete
 
 ### Part 1. Analytics   
 
+Edit the `src/index.js` file.  Add the following lines to the top of the file (below all the other imports) to configure Amplify:
+
+```
+import Amplify from 'aws-amplify';
+import awsConfig from './aws-exports';
+
+Amplify.configure(awsConfig);
+```
+
 Record path name as user navigates:
 
 ```js
@@ -103,21 +112,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 ### Part 2. 
 
 One of the features on the home page is an email sign-up page.  In this lesson, you will link the email sign-up to Amazon Pinpoint, then use the Amazon Pinpoint user segmentation and campaigns features to send an email to all the registered users.
-
-Add the AWS Amplify and the AWS SDK for JavaScript to the project:
-
-```
-yarn add aws-sdk aws-amplify uuid
-```
-
-Edit the `src/index.js` file.  Add the following lines to the top of the file (below all the other imports):
-
-```
-import Amplify from 'aws-amplify';
-import awsConfig from './aws-exports';
-
-Amplify.configure(awsConfig);
-```
 
 Edit the `src/components/EmailSignUp.js` file.  Add the following lines to the top of the file:
 

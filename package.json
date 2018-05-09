@@ -5,12 +5,14 @@
   "dependencies": {
     "aws-amplify": "^0.3.3",
     "aws-amplify-react": "^0.1.43",
+    "aws-sdk": "^2.235.1",
     "esri-loader": "^2.2.0",
     "normalize.css": "^8.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "uuid": "^3.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
