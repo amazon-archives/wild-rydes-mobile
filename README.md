@@ -280,8 +280,6 @@ storage, then adjust the routing based on authentication.
 
 ```
 const isAuthenticated = () => Amplify.Auth.user !== null;
-
-
 ```
 
 Run the following to publish the new site:
