@@ -304,6 +304,7 @@ We'll do this in the `catch` error block of the `onSubmitForm` method in `src/au
 
 ```js
 // src/auth/SignUp.js
+
 async onSubmitForm(e) {
   // previous code here omitted
   } catch (err) {
