@@ -74,9 +74,7 @@ awsmobile publish
 
 A browser will open pointing to the newly created site once publication completes.
 
-## Lesson 2: Analytics & Email Campaign
-
-### Part 1. Analytics   
+## Lesson 2: Email Campaign
 
 Before using any AWS Amplify modules, we first need to configure Amplify to use the AWS Mobile configuration stored in `src/aws-exports.js`.
 
@@ -88,30 +86,6 @@ import awsConfig from './aws-exports';
 
 Amplify.configure(awsConfig);
 ```
-
-Record path name as user navigates:
-
-```js
-// import Analytics
-import Amplify, { Analytics } from 'aws-amplify'
-
-// src/index.js
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  Analytics.record('route path: ', { routeName: rest.path }) 
-  return (
-    <Route
-      {...rest}
-      render={props => (
-      isAuthenticated() === true
-        ? <Component {...props} />
-        : <Redirect to='/signin' />
-    )} />
-  )
-};
-
-```
-
-### Part 2. 
 
 One of the features on the home page is an email sign-up page.  In this lesson, you will link the email sign-up to Amazon Pinpoint, then use the Amazon Pinpoint user segmentation and campaigns features to send an email to all the registered users.
 
@@ -318,7 +292,30 @@ awsmobile publish -c -n -f
 
 This will ensure CloudFront is also flushed.  If in doubt, go to the S3 bucket instead.  You should now be able to click on the Giddy Up! button and get a sign-up / sign-in button.  When signed-in, you should see the temporary Ride page.
 
-## Lesson 4: Create a Serverless Backend
+## Lesson 4: Analytics    
+
+Now that we have authentication enabled in the app, let's add an analytics event that will track the use case of a user attempting to sign up but instead receiving an error.
+
+We want to know what types of errors are being thrown when our users are attempting to sign up to better understand the signup flow.
+
+To do this, let's create an Analytics event that will get called in the event of an error.
+
+We'll do this in the `catch` error block of the `onSubmitForm` method in `src/auth/SignUp.js`.
+
+```js
+// src/auth/SignUp.js
+async onSubmitForm(e) {
+  // previous code here omitted
+  } catch (err) {
+    alert(err.message);
+    Analytics.record('Signup Error', err.message) // New
+    console.error("Exception from Auth.signUp: ", err);
+    this.setState({ stage: 0, email: '', password: '', confirm: '' });
+  }
+}
+```
+
+## Lesson 5: Create a Serverless Backend
 
 First, create a DynamoDB table.  This can only be done on the console (creating a database on the command line also creates a CRUD API which is not desired in this instance):
 
