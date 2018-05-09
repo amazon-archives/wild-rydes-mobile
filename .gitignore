@@ -7,7 +7,7 @@
 /coverage
 
 # aws
-awsmobile
+awsmobilejs
 src/aws-exports.js
 
 # production
