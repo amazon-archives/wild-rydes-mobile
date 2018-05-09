@@ -78,7 +78,9 @@ A browser will open pointing to the newly created site once publication complete
 
 ### Part 1. Analytics   
 
-Edit the `src/index.js` file.  Add the following lines to the top of the file (below all the other imports) to configure Amplify:
+Before using any AWS Amplify modules, we first need to configure Amplify to use the AWS Mobile configuration stored in `src/aws-exports.js`.
+
+Edit the `src/index.js` file & add the following lines to the top of the file (below all the other imports) to configure Amplify:
 
 ```
 import Amplify from 'aws-amplify';
