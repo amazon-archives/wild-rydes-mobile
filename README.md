@@ -220,7 +220,7 @@ import { Analytics } from 'aws-amplify'
 
 // track error in the signUp method
 .catch(err => {
-  Analytics.record('Error signing up!', { message: error.message })
+  Analytics.record('Error signing up!', { message: err.message })
   console.log('error signing up: ', err)
 })
 ```
