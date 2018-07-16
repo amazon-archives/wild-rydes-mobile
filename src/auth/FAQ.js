@@ -17,7 +17,7 @@ import * as Images from '../assets/images'
 
 class FAQ extends React.Component {
   render() {
-    const open = () => this.props.navigation.navigate('DrawerOpen')
+    const open = () => this.props.navigation.openDrawer()
     return (
       <ScrollView bounces={false} style={styles.container}>
         

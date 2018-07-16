@@ -5,7 +5,7 @@ import SignIn from './SignIn'
 import MeetTheUnicorns from './MeetTheUnicorns'
 import Investors from './Investors'
 
-import { DrawerNavigator } from 'react-navigation'
+import { createDrawerNavigator } from 'react-navigation'
 
 import { colors, fonts } from '../theme'
 
@@ -27,4 +27,4 @@ const routeConfig = {
   }
 }
 
-export default DrawerNavigator(routes, routeConfig)
+export default createDrawerNavigator(routes, routeConfig)

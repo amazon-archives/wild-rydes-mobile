@@ -7,18 +7,18 @@
     "test": "jest"
   },
   "dependencies": {
-    "aws-amplify": "^0.3.3",
-    "aws-amplify-react-native": "^0.2.9",
-    "react": "16.3.1",
-    "react-native": "0.55.1",
+    "aws-amplify": "^1.0.0",
+    "aws-amplify-react-native": "^1.0.0",
+    "react": "16.4.1",
+    "react-native": "0.56.0",
     "react-native-vector-icons": "^4.6.0",
-    "react-navigation": "^1.5.11"
+    "react-navigation": "^2.6.2"
   },
   "devDependencies": {
-    "babel-jest": "22.4.3",
-    "babel-preset-react-native": "4.0.0",
-    "jest": "22.4.3",
-    "react-test-renderer": "16.3.1"
+    "babel-jest": "23.4.0",
+    "babel-preset-react-native": "^5",
+    "jest": "23.4.1",
+    "react-test-renderer": "16.4.1"
   },
   "jest": {
     "preset": "react-native"

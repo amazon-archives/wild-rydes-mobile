@@ -34,7 +34,7 @@ class SignIn extends React.Component {
     this.props.navigation.navigate('HomeNav')
   }
   render() {
-    const open = () => this.props.navigation.navigate('DrawerOpen')
+    const open = () => this.props.navigation.openDrawer()
     return (
       <ScrollView bounces={false} style={styles.container}>
         <ImageBackground

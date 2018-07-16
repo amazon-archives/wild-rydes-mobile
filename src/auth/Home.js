@@ -33,7 +33,7 @@ class Home extends React.Component {
     })
   }
   render() {
-    const open = () => this.props.navigation.navigate('DrawerOpen')
+    const open = () => this.props.navigation.openDrawer()
     return (
       <ScrollView
         bounces={false}
