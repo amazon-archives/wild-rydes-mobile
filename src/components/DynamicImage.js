@@ -17,7 +17,7 @@ import React from 'react';
 const DynamicImage = (props) => {
   const altText = props.alt || "dynamic image";
   return (
-    <img src={process.env.PUBLIC_URL + '/images/' + props.src} alt={altText}/>
+    <img src={"https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/" + props.src} alt={altText}/>
   );
 };
 

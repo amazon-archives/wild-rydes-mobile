@@ -95,7 +95,7 @@ class ESRIMap extends React.Component {
         });
 
         var unicornSymbol = new ESRI.PictureMarkerSymbol({
-          url: 'images/unicorn-icon.png',
+          url: 'https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/unicorn-icon.png',
           width: '25px',
           height: '25px'
         });

@@ -72,7 +72,7 @@ const StorySection = () => (
 const SignUpSection = () => (
   <section className="home-sign-up">
     <div className="row column">
-      <DynamicImage src="wr-home-W.png"/>
+      <DynamicImage src="wr-home-w.png"/>
       <EmailSignUp/>
       <div className="apps">
         <a className="app-icon" href=""><DynamicImage src="wr-home-apple.png"/></a>

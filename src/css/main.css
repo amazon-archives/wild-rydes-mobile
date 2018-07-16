@@ -1903,7 +1903,7 @@ img {
 }
 
 .site-nav {
-    background: url(../images/star-pattern.png) 50% hsla(0, 0%, 100%, .2);
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/star-pattern.png") 50% hsla(0, 0%, 100%, .2);
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -2041,7 +2041,7 @@ img {
 
 .site-logo {
     display: block;
-    background: url(../images/wr-logo-white.png) no-repeat;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-logo-white.png") no-repeat;
     height: 3.5rem;
     width: 15.1875rem;
     text-indent: -999em;
@@ -2049,7 +2049,7 @@ img {
 }
 
 .site-logo.dark {
-    background: url(../images/wr-logo-black.png) no-repeat
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-logo-black.png") no-repeat
 }
 
 @media screen and (min-width:64em) {
@@ -2110,7 +2110,7 @@ img {
 }
 
 .page-home .site-header .title {
-    background: url(../images/wr-home-top.jpg) no-repeat top;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-home-top.jpg") no-repeat top;
     background-size: cover;
     padding-bottom: 70.2753441802%;
     margin: 0;
@@ -2203,27 +2203,27 @@ img {
 }
 
 .home-about-block .icon-download:before {
-    background: url(../images/wr-home-block-1.png) no-repeat;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-home-block-1.png") no-repeat;
     width: 11rem
 }
 
 .home-about-block .icon-unicorn:before {
-    background: url(../images/wr-home-block-2.png) no-repeat;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-home-block-2.png") no-repeat;
     width: 14.75rem
 }
 
 .home-about-block .icon-price:before {
-    background: url(../images/wr-home-block-3.png) no-repeat;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-home-block-3.png") no-repeat;
     width: 13.75rem
 }
 
 .home-about-block .icon-success:before {
-    background: url(../images/wr-home-block-4.png) no-repeat;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-home-block-4.png") no-repeat;
     width: 14.75rem
 }
 
 .home-story {
-    background: url(../images/wr-home-about.jpg) no-repeat bottom;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-home-about.jpg") no-repeat bottom;
     background-size: cover;
     color: #fff;
     text-align: center;
@@ -2331,31 +2331,31 @@ img {
 }
 
 .home-sign-up .social .icon-fb {
-    background: url(../images/wr-home-facebook.png) no-repeat;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-home-facebook.png") no-repeat;
     height: 1.5625rem;
     width: 1.5625rem
 }
 
 .home-sign-up .social .icon-tw {
-    background: url(../images/wr-home-twitter.png) no-repeat
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-home-twitter.png") no-repeat
 }
 
 .home-sign-up .social .icon-ig {
-    background: url(../images/wr-home-instagram.png) no-repeat
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-home-instagram.png") no-repeat
 }
 
 .home-sign-up .social .icon-wc {
-    background: url(../images/wr-home-wechat.png) no-repeat;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-home-wechat.png") no-repeat;
     width: 1.8125rem
 }
 
 .home-sign-up .social .icon-wb {
-    background: url(../images/wr-home-weibo.png) no-repeat;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-home-weibo.png") no-repeat;
     width: 1.6875rem
 }
 
 .home-quote {
-    background: url(../images/wr-home-quote.jpg) no-repeat bottom;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-home-quote.jpg") no-repeat bottom;
     background-size: cover;
     color: #fff;
     text-align: center;
@@ -2439,7 +2439,7 @@ img {
 }
 
 .page-unicorns .site-header {
-    background: url(../images/wr-unicorn-header.png) no-repeat top;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-unicorn-header.png") no-repeat top;
     background-size: cover;
     text-align: center;
     padding: 1.875rem 0
@@ -2521,7 +2521,7 @@ img {
 }
 
 .page-investors .top-section {
-    background: url(../images/wr-investors-header.png) no-repeat bottom;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-investors-header.png") no-repeat bottom;
     background-size: cover;
     text-align: center;
     padding: 1.875rem 0
@@ -2576,17 +2576,17 @@ img {
 }
 
 .investors-list .title.pcp:before {
-    background: url(../images/wr-investors-pcp.png) no-repeat 50%;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-investors-pcp.png") no-repeat 50%;
     width: 8.8125rem
 }
 
 .investors-list .title.awesome:before {
-    background: url(../images/wr-investors-awesome.png) no-repeat 50%;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-investors-awesome.png") no-repeat 50%;
     width: 7.75rem
 }
 
 .investors-list .title.barn:before {
-    background: url(../images/wr-investors-thebarn.png) no-repeat 50%;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-investors-thebarn.png") no-repeat 50%;
     width: 7.4375rem
 }
 
@@ -2650,23 +2650,23 @@ img {
 }
 
 .board-directors .block.one {
-    background-image: url(../images/wr-investors-1.png)
+    background-image: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-investors-1.png")
 }
 
 .board-directors .block.two {
-    background-image: url(../images/wr-investors-2.png)
+    background-image: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-investors-2.png")
 }
 
 .board-directors .block.three {
-    background-image: url(../images/wr-investors-3.png)
+    background-image: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-investors-3.png")
 }
 
 .board-directors .block.four {
-    background-image: url(../images/wr-investors-4.png)
+    background-image: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-investors-4.png")
 }
 
 .board-directors .block.five {
-    background-image: url(../images/wr-investors-5.png)
+    background-image: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-investors-5.png")
 }
 
 .board-directors .content {
@@ -2675,7 +2675,7 @@ img {
 }
 
 .page-faq .site-header {
-    background: url(../images/wr-faq-header.jpg) no-repeat top;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-faq-header.jpg") no-repeat top;
     background-size: cover;
     color: #fff;
     text-align: center;
@@ -2724,7 +2724,7 @@ img {
 }
 
 .page-apply .site-header {
-    background: url(../images/wr-apply-header.png) no-repeat bottom;
+    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-apply-header.png") no-repeat bottom;
     background-size: cover;
     color: #fff;
     text-align: center;
