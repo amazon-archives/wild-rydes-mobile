@@ -1,380 +1,139 @@
-# Wild Rydes Mobile
+# AWS Mobile Loft - Introduction to AWS Mobile
 
-Welcome to the Wild Rydes Mobile project.  In this project, we will take you through the steps necessary to build a complete website with analytics, authentication, email list sign-up and booking of a ride.
+## Getting started
 
-## Getting Started
+To get started, we will first create a new React application using the Create React App CLI.
 
-To continue with this course, you must first have the AWS Mobile CLI installed and configured:   
+> If you do not already have Creeate React App installed, installed:
 
-1. Install the CLI   
+```
+npm install -g create-react-app
+```
+
+#### Creating the app
+
+```
+create-react-app react-aws-app
+```
+
+## Lesson 1 - Introduction to AWS Mobile Hub & the AWS Mobile CLI
+
+Installing & configuring a new mobile hub project.
+
+#### ⚡ Installing the AWS Mobile CLI
 
 ```
 npm i -g awsmobile-cli
 ```
 
-2. Configure the CLI   
+#### ⚡ Configuring the CLI
 
 ```
 awsmobile configure
 ```
 
+To get an __accessKeyId__ & __secretAccessKey__:
+1. Visit the [IAM Console](https://console.aws.amazon.com/iam/home).
+2. Click __Users__ in left hand menu.
+3. Click __Add User__.
+4. Give the user a name & choose __programatic access__ as the access type & click next.
+5. Click __Create Group__.
+6. Give the group a name & choose __Administrator Access__ as the access type & click __Create Group__.
+7. Click __Next__ & click __Create User__.
+8. Copy the __accessKeyId__ & __secretAccessKey__ to the terminal to configure the CLI.
 
-## Lesson 1: Web Hosting
-
-The design team has dropped the final version of the web site, but has not set up web hosting.  In this lesson, we will quickly set up a scalable web site with global reach and deploy the code to the web site.
-
-Clone the project & change into the directory:
-
-```
-git clone https://github.com/aws-samples/wild-rydes-mobile
-cd wild-rydes-mobile
-```
-
-Install the dependencies using npm or yarn:
-
-```
-yarn
-or
-npm install
-```
-
-__Create the new Mobile Hub project__
+#### ⚡ Creating a new Project
 
 ```
 awsmobile init
 ```
 
-For the questions:
+After running the above command you will have a few options:
 
-* Where is your project's source directory: (src) **src**
-* Where is your project's distribution directory that stores build artifacts (build) **build**
-* What is your project's build command: (npm run-script build) **yarn run build**
-* What is your project's start command for local test run: (npm run-script start) **yarn start**
-* What awsmobile project name would you like to use: (wild-rydes-mobile-2018-03-09-14-57-35) **wild-rydes-mobile**
+- Choose default for source directory
+- Choose default for distribution directory
+- Choose default for build command
+- __Give the project a name of AmplifyReact__
+- Choose default for project's start command
 
-The AWS Mobile Hub project will be created.
+## Lesson 2 - Integrating AWS & AWS Amplify into your React application
 
-__To run the projecte locally:__
+#### ⚡ Configuring the project with `Amplify` & `aws-exports.js`
 
-Run the project locally using either npm or yarn: 
+1. Open index.js
+2. Add the following code below the last `import` statement
 
-```
-yarn start
-or
-npm start
-```
-
-__To build the website in the cloud:__
-
-Use the following to build and publish the project to the cloud:
-
-```
-awsmobile publish
+```js
+import Amplify from 'aws-amplify'
+import config from './aws-exports'
+Amplify.configure(config)
 ```
 
-A browser will open pointing to the newly created site once publication completes.
+#### ⚡ Adding a new service - User Signin with Amazon Cognito
 
-## Lesson 2: Email Campaign
+1. Add the new functionality using the CLI
 
-Before using any AWS Amplify modules, we first need to configure Amplify to use the AWS Mobile configuration stored in `src/aws-exports.js`.
-
-Edit the `src/index.js` file & add the following lines to the top of the file (below all the other imports) to configure Amplify:
-
-```
-import Amplify from 'aws-amplify';
-import awsConfig from './aws-exports';
-
-Amplify.configure(awsConfig);
-```
-
-One of the features on the home page is an email sign-up page.  In this lesson, you will link the email sign-up to Amazon Pinpoint, then use the Amazon Pinpoint user segmentation and campaigns features to send an email to all the registered users.
-
-Edit the `src/components/EmailSignUp.js` file.  Add the following lines to the top of the file:
-
-```
-import uuid from 'uuid';
-import { Auth } from 'aws-amplify';
-import * as Pinpoint from 'aws-sdk/clients/pinpoint';
-import awsConfig from '../aws-exports';
-```
-
-Then look for `/* TODO: HANDLE FORM INPUT */` - this is where we need to add code to submit the email address into the Amazon Pinpoint analytics platform.  Replace the onEmailSubmitted() method that is there now with the following:
-
-```
-  async onEmailSubmitted(event) {
-    event.preventDefault();
-
-    // Create a Pinpoint connection
-    const credentials = await Auth.currentCredentials();
-    const pinpointClient = new Pinpoint({
-      region: awsConfig.aws_mobile_analytics_app_region,
-      credentials: Auth.essentialCredentials(credentials)
-    });
-    if (!this.endpointId)
-      this.endpointId = uuid.v4();
-
-    // Create an endpoint definition
-    const params = {
-      ApplicationId: awsConfig.aws_mobile_analytics_app_id,
-      EndpointId: this.endpointId,
-      EndpointRequest: {
-        Address: this.state.email,
-        ChannelType: 'EMAIL',
-        EffectiveDate: new Date().toISOString(),
-        OptOut: 'NONE',
-        RequestId: uuid.v4(),
-        User: {
-          UserAttributes: {
-            email: [ this.state.email ],
-            emailsignup: [ 'true' ]
-          },
-          UserId: this.state.email
-        }
-      }
-    };
-
-    // Update the endpoint definition
-    pinpointClient.updateEndpoint(params, (err, data) => {
-      if (err) {
-        alert('Email Signup Failed');
-        console.error('updateEndpoint: ', err);
-      } else {
-        this.setState({ email: '', emailsubmitted: true });
-      }
-    });
-    /* END OF PINPOINT CHANGES */
-  }
-```
-
-Change the function to "async" by adding async in the front of `onEmailSubmitted(event)`
-
-Publish the code with `awsmobile publish`.  Once the app has been published, enter your email address within the email sign-up form and click **Submit**.
-
-### Configure the Email Channel
-
-* Open the AWS Mobile Hub console, and select your project.
-* Choose **Analytics** (in the top-right corner).
-* Choose **Settings** (in the left-hand menu).
-* Choose **Channels** (along the top)
-* Choose **Email** > **Enable Email Channel**
-* Choose **Email Address**, enter your email address.
-* If required, click Verify and complete the verification process.
-* Choose **Save**.
-
-### Create a User Segment
-
-* Choose **Segments** (in the left-hand menu).
-* Choose **New segment**.
-* Give your segment a name like "Email List Users"
-* Fill in the form:
-	* **Build segment**.
-	* **Email**.
-  * Filter by user attributes: **emailsignup** > **true**.
-* Validate that the segment estimate is 1 user.
-* Choose **Create segment**.
-
-### Create an Email Campaign
-
-* Choose **Campaigns**
-* Choose **New campaign**
-* Name the campaign "New Email List Campaign", then choose **Next step**
-* Choose **Use a previously defined segment**
-* Select your segment, then choose **Next step**
-* Enter a subject and body, then choose **Next step**
-* Select **Immediate**, then choose **Next step**
-* Choose **Launch campaign**
-
-Check your email for your test message!
-
-## Lesson 3: Authentication
-
-Sign up, sign in, and forgot password screens have been provided, but need to be wired up to the main application.  First, create an Amazon
-Cognito user pool:
-
-```
+```bash
 awsmobile user-signin enable
+```
+
+2. Push the new configuration to the Mobile Hub Console
+
+```bash
 awsmobile push
 ```
 
-This will update the backend without publishing updated code.  Now, update the `src/auth/SignUp.js` file to do the sign-up process:
+3. To view the console, run the following command:
 
-```
-  async onSubmitForm(e) {
-    e.preventDefault();
-    try {
-      const params = {
-        username: this.state.email.replace(/[@.]/g, '|'),
-        password: this.state.password,
-        attributes: {
-          email: this.state.email,
-          phone_number: this.state.phone
-        },
-        validationData: []
-      };
-      const data = await Auth.signUp(params);
-      console.log(data);
-      this.setState({ stage: 1 });
-    } catch (err) {
-      alert(err.message);
-      console.error("Exception from Auth.signUp: ", err);
-      this.setState({ stage: 0, email: '', password: '', confirm: '' });
-    }
-  }
-
-  async onSubmitVerification(e) {
-    e.preventDefault();
-    try {
-      const data = await Auth.confirmSignUp(
-        this.state.email.replace(/[@.]/g, '|'),
-        this.state.code
-      );
-      console.log(data);
-      // Go to the sign in page
-      this.props.history.replace('/signin');
-    } catch (err) {
-      alert(err.message);
-      console.error("Exception from Auth.confirmSignUp: ", err);
-      this.setState({ stage: 0, email: '', password: '', confirm: '', code: '' });
-    }
-  }
+```bash
+awsmobile console
 ```
 
-Update the `src/auth/SignIn.js` file to do the sign-in process:
+#### ⚡ Implementing User-signup & User-signin using the `withAuthenticator` HOC
 
-```
-  async onSubmitForm(e) {
-    e.preventDefault();
-    try {
-        const userObject = await Auth.signIn(
-            this.state.email.replace(/[@.]/g, '|'),
-            this.state.password
-        );
-        console.log('userObject = ', userObject);
-        this.setState({ userObject, stage: 1 });
-    } catch (err) {
-        alert(err.message);
-        console.error('Auth.signIn(): ', err);
-    }
-  }
+1. Open App.js
 
-  async onSubmitVerification(e) {
-    e.preventDefault();
-    try {
-        const data = await Auth.confirmSignIn(
-            this.state.userObject,
-            this.state.code
-        );
-        console.log('data = ', data);
-        this.setState({ stage: 0, email: '', password: '', code: '' });
-        this.props.history.replace('/app');
-    } catch (err) {
-        alert(err.message);
-        console.error('Auth.confirmSignIn(): ', err);
-    }
-  }
-```
-
-Finally, take a look at the route configuration in `src/index.js`.  We
-need to update so that the current authentication is read from local
-storage, then adjust the routing based on authentication.
-
-```
-const isAuthenticated = () => Amplify.Auth.user !== null;
-```
-
-Run the following to publish the new site:
-
-```
-awsmobile publish -c
-```
-
-This will ensure CloudFront is also flushed.  If in doubt, go to the S3 bucket instead.  You should now be able to click on the Giddy Up! button and get a sign-up / sign-in button.  When signed-in, you should see the temporary Ride page.
-
-## Lesson 4: Analytics    
-
-Now that we have authentication enabled in the app, let's add an analytics event that will track the use case of a user attempting to sign up but instead receiving an error.
-
-We want to know what types of errors are being thrown when our users are attempting to sign up to better understand the signup flow.
-
-To do this, let's create an Analytics event that will get called in the event of an error.
-
-We'll do this in the `catch` error block of the `onSubmitForm` method in `src/auth/SignUp.js`.
+2. Import the `withAuthenticator` HOC from 'aws-amplify-react'
 
 ```js
-// src/auth/SignUp.js
+import { withAuthenticator } from 'aws-amplify-react'
+```
 
-async onSubmitForm(e) {
-  // previous code here omitted
-  } catch (err) {
-    alert(err.message);
-    Analytics.record('Signup Error', err.message) // New
-    console.error("Exception from Auth.signUp: ", err);
-    this.setState({ stage: 0, email: '', password: '', confirm: '' });
-  }
+3. Wrap the App export with the `withAuthenticator` HOC
+
+```js
+export default withAuthenticator(App)
+```
+
+#### ⚡ Introduction to implementing hand-rolled Authentication 
+
+AWS Amplify Auth category has over 30 different methods available, including `signUp`, `confirmSignUp`, `signIn`, `confirmSignIn`, `changePassword`, `forgotPassword` & many many others. You can view the entire API [here](https://aws-amplify.github.io/amplify-js/api/classes/authclass.html).
+
+To manually sign up a new User with our existing Amazon Cognito configuration, we can call `Auth.signUp`, & must provide the following parameters:
+
+- username`<string>`
+- password`<string>`
+- attributes`<object>`
+  - email`<string>`
+  - phone_number`<string>`
+
+We would call some method, passing in the above info to `Auth.signUp`. In React, it could look something like this:
+
+```js
+import { Auth } from 'aws-amplify'
+
+signUpUser = () => {
+  const { username, password, email, phone_number } = this.state
+  Auth.signUp({
+    username, password, attributes: { email, phone_number }
+  })
+  .then(success => console.log('successfully signed up user!: ', success))
+  .catch(err => console.log('error signing up user: ', err))
 }
 ```
 
-## Lesson 5: Create a Serverless Backend
+This would trigger an __MFA__ using the provided phone number.
 
-First, create a DynamoDB table.  This can only be done on the console (creating a database on the command line also creates a CRUD API which is not desired in this instance):
+To handle __MFA__ on user sign up & sign in, we can use `confirmSignUp` & `confirmSignIn`.
 
-* Open the [AWS Mobile Hub Console](https://console.aws.amazon.com/mobilehub/home).
-* Choose your project.
-* Under **Add more backend features**, choose **NoSQL Database**.
-* Choose **Enable NoSQL**, then choose **Add Table**.
-* Choose **Custom**.  Fill in the presented form:
-  * Table name: **Rides**
-  * Permissions: **Public**
-  * Attributes:
-    * RideId / String / Partition Key
-* Choose **Create table**.
-* Confirm the table creation by choosing **Create table** again.
-
-Next, create the Cloud Logic API.  This can be done from the command line:
-
-```
-awsmobile pull
-awsmobile cloud-api enable --prompt
-```
-
-__When asked `sync corresponding contents in backend/ with #current-backend-info`? choose `y`__   
-
-The `awsmobile pull` command will pull the current definition from the AWS Mobile Hub service.  This will include the definition of the DynamoDB table.  You can then continue by changing the current definition with the second `awsmobile` command.
-
-Select **Create a new API**.  This will prompt you for some information:
-
-* API Name: **requestUnicorn**
-* Restrict API Access to signed-in users? **Y**
-* HTTP Path Name: **/ride**
-* Lambda Function Name: **requestUnicorn**
-* Add another HTTP path name? **N**
-
-Once complete, copy `./server/requestUnicorn.js` to `./awsmobilejs/backend/cloud-api/requestUnicorn/app.js`.  This is the code that will be run in the serverless backend in response to the API request.
-
-Run `awsmobile push` to publish the backend changes to AWS.
-
-Next, edit the hasApi method and uncomment the code:
-
-```
-hasApi() {
-  const api = awsConfig.aws_cloud_logic_custom.filter(v => v.name === 'requestUnicorn');
-  return (typeof api !== 'undefined');
-}
-```
-
-Finally, edit the `./src/pages/MainApp.js` page.  Adjust the getData() method to read as follows:
-
-```
-  async getData(pin) {
-    const body = {
-      PickupLocation: {
-        Longitude: pin.longitude,
-        Latitude: pin.latitude
-      }
-    };
-    return await API.post(apiName, apiPath, { body });
-  }
-```
-
-Publish the application using `awsmobile publish`.  Run the application (either locally or from the cloud), log in.  Click somewhere on the map to set the pickup location, then click Request to request the ride.
-
+To see how to build a custom UI using the Auth class, check out [this](https://aws-amplify.github.io/amplify-js/media/authentication_guide#sign-in) section of the documentation.
