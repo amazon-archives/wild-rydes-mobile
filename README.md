@@ -66,9 +66,8 @@ After running the above command you will have a few options:
 
 - Choose default for source directory
 - Choose default for project's distribution directory
-- Choose default for distribution directory
 - Choose default for build command
-- __Give the project a name of AmplifyReact__
+- Give the project a name of __AmplifyReact__
 - Choose default for project's start command
 
 ## 🤖 Lesson 2 - Integrating AWS & AWS Amplify into your React application
@@ -206,7 +205,7 @@ Here, we can see that the Lamdba function is running an express server, handling
 
 Let's update this to return an array of pets.
 
-#### ⚡ Updating the Lambd function
+#### ⚡ Updating the Lambda function
 
 1. Update the `app.get('/pets/'` path to the following:
 
@@ -231,6 +230,40 @@ awsmobile push
 
 ```bash
 npm start
+```
+
+#### ⚡ Rendering the list of pets from the API in the UI
+
+Next, we want to render the date being returned from the API. To do so, we'll create some state in the component to hold the data. Then, once the data is returned from the API, we'll reset the state, passing the new data.
+
+1. Create state in the component
+
+```js
+state = {
+  pets: []
+}
+```
+
+2. Change componentDidMount to set the state when the data is returned.
+
+```js
+async componentDidMount() {
+  const data = await API.get(apiName, path)
+  console.log('data: ', data)
+  this.setState({
+    pets: data.data
+  })
+}
+```
+
+3. Finally, add the following code to your render method to display the list of pets in the UI:
+
+```js
+{
+  this.state.pets.map((pet, index) => (
+    <h2 key={index}>{pet}</h2>
+  ))
+}
 ```
 
 ## 🤖 Lesson 4 - Adding Analytics with [Amazon Pinpoint](https://aws.amazon.com/pinpoint/)
@@ -301,7 +334,7 @@ awsmobile console
 
 Next, we would like to add a AWS AppSync GraphQL API to the application.
 
-#### ⚡ Creating & configuring the API
+#### ⚡ Creating the API
 
 We can create the new API from the command line:
 
@@ -319,7 +352,32 @@ awsmobile push
 
 Now that the API has been created, let's to into the AWS console to update the configuration.
 
-Visit the AWS AppSync console at 
+Visit the AWS AppSync console at [https://console.aws.amazon.com/appsync/](https://console.aws.amazon.com/appsync/).
+
+Fromt here, click on the __AmplifyReact__ API to open it in the console.
+
+#### ⚡ Configuring the API
+
+Now we need to update the schema to our new schema.
+
+Click on __Schema__ in the left hand menu to open the schema editor.
+
+Here, delete the exsing schema and add the following, then click __Save Schema__:
+
+```js
+type Pet {
+  id: ID!
+  name: String!
+}
+
+type Query {
+  fetchPet(id: ID!): Pet
+}
+```
+
+Next, click on the __Create Resources__ button in the top right corner.
+
+When asked to __Define or select a type__, choose __Use existing type__, and then choose the Pet type. Then scroll down & click __Create__.
 
 
 #### ⚡ Connecting the React application to the AWS AppSync API
