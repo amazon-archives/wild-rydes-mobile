@@ -4,7 +4,7 @@
 
 To get started, we will first create a new React application using the Create React App CLI.
 
-> If you do not already have Creeate React App installed, installed:
+> If you do not already have Creeate React App installed, install it now with the following command:
 
 ```
 npm install -g create-react-app
@@ -46,7 +46,7 @@ npm i -g awsmobile-cli
 awsmobile configure
 ```
 
-To get an __accessKeyId__ & __secretAccessKey__:
+If you need to get an __accessKeyId__ & __secretAccessKey__:
 1. Visit the [IAM Console](https://console.aws.amazon.com/iam/home).
 2. Click __Users__ in left hand menu.
 3. Click __Add User__.
@@ -67,16 +67,33 @@ After running the above command you will have a few options:
 - Choose default for source directory
 - Choose default for project's distribution directory
 - Choose default for build command
-- Give the project a name of __AmplifyReact__
 - Choose default for project's start command
+- Give the project a name of __AmplifyReact__
+
+
+Now that the project is successfully created, we need to install the proper version of the AWS Amplify React package:
+
+```bash
+npm install aws-amplify-react@0.1.54
+// or
+yarn add aws-amplify-react@0.1.54
+```
+
+Now, we can view it in the AWS Console by running the following command:
+
+```bash
+awsmobile console
+```
 
 ## 🤖 Lesson 2 - Integrating AWS & AWS Amplify into your React application
 
-In this section, we'll first integrate our AWS Mobile Hub project in with our newly create React application using the AWS Amplify library. We'll also learn how to add a new service, [Amazon Cognito](https://aws.amazon.com/cognito/), to our existing AWS Mobile Hub project using the CLI. Finally, we'll implement Authentication into the application using the newly created service.
+In this section, we'll first integrate our AWS Mobile Hub project in with our newly created React application using the [AWS Amplify](https://aws-amplify.github.io/amplify-js/media/developer_guide) library.    
+
+We'll also learn how to add a new service, [Amazon Cognito](https://aws.amazon.com/cognito/), to our existing AWS Mobile Hub project using the CLI. Finally, we'll implement Authentication into the application using Amazon Cognito with AWS Amplify.
 
 #### ⚡ Configuring the project with `Amplify` & `aws-exports.js`
 
-1. Open index.js
+1. Open __index.js__
 2. Add the following code below the last `import` statement
 
 ```js
@@ -105,11 +122,13 @@ awsmobile push
 awsmobile console
 ```
 
+Now, in the list of __Backend__ services, we see that __User Signin__ is now enabled.
+
 #### ⚡ Implementing User-signup & User-signin using the `withAuthenticator` HOC
 
 1. Open App.js
 
-2. Import the `withAuthenticator` HOC from 'aws-amplify-react'
+2. Import the `withAuthenticator` HOC from `aws-amplify-react`
 
 ```js
 // App.js
@@ -234,7 +253,7 @@ npm start
 
 #### ⚡ Rendering the list of pets from the API in the UI
 
-Next, we want to render the date being returned from the API. To do so, we'll create some state in the component to hold the data. Then, once the data is returned from the API, we'll reset the state, passing the new data.
+Next, we want to render the data being returned from the API. To do so, we'll create some state in the component to hold the data. Then, once the data is returned from the API, we'll reset the state, passing in the new data.
 
 1. Create state in the component
 
@@ -244,7 +263,7 @@ state = {
 }
 ```
 
-2. Change componentDidMount to set the state when the data is returned.
+2. Change `componentDidMount` to set the state when the data is returned.
 
 ```js
 async componentDidMount() {
@@ -284,7 +303,7 @@ Analytics.record({ name: 'Add to cart button clicked' })
 Analytics.record({ name: 'Added socks to shopping cart', attributes: { username: 'amanda33' }})
 
 // 3. event name, attributes, & metrics
-Analytics.record({ name: 'Added socks to shopping cart', attributes: { username: 'amanda33' }, metrics: { time } })
+Analytics.record({ name: 'Added socks to shopping cart', attributes: { username: 'amanda33' }, metrics: { time: '8:33pm ET' } })
 ```
 
 #### ⚡ Recording an Analytics event
