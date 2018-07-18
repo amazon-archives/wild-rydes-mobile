@@ -350,7 +350,7 @@ Now, push the new configuration to AWS Mobile Hub:
 awsmobile push
 ```
 
-Now that the API has been created, let's to into the AWS console to update the configuration.
+Now that the API has been created, let's go into the AWS console to update the configuration.
 
 Visit the AWS AppSync console at [https://console.aws.amazon.com/appsync/](https://console.aws.amazon.com/appsync/).
 
@@ -379,6 +379,133 @@ Next, click on the __Create Resources__ button in the top right corner.
 
 When asked to __Define or select a type__, choose __Use existing type__, and then choose the Pet type. Then scroll down & click __Create__.
 
+Once the resources have finished being created, we can start executing mutations against the API.
+
+In the left hand menu, click on __Queries__, & add the following mutation into the query editor, then click the orange play button:
+
+```graphql
+mutation create {
+  createPet(input:{
+    name: "Spike"
+  }) {
+    id
+  }
+}
+```
+
+> Feel free to create as many Pets as you would like, as we will be querying for this data in just a moment.
+
+If you would like to query the data to make sure everything is working properly, try using this query in the query editor:
+
+```graphql
+query list {
+  listPets {
+    items {
+      id
+      name
+    }
+  }
+}
+```
 
 #### ⚡ Connecting the React application to the AWS AppSync API
 
+Now that the API is created & working properly, let's go ahead and query for data from the client & show it in the UI.
+
+In App.js, let's go ahead and import __API__ & __graphqlOperation__ from 'aws-amplify':
+
+```js
+// App.js
+import { API, graphqlOperation } from 'aws-amplify'
+```
+
+Next, we'll define our query:
+
+```js
+const ListPets = `
+  query {
+    listPets {
+      items {
+        id
+        name
+      }
+    }
+  }
+`
+```
+
+Now, in the class, we'll define some state, and set a pets property equal to an empty array for now:
+
+```js
+state = { pets: [] }
+```
+
+Now that we have some initial state, we'll call the AppSync API to fetch the data within the `componentDidMount` lifecycle hook:
+
+```js
+async componentDidMount() {
+  const pets = await API.graphql(graphqlOperation(ListPets))
+  console.log('pets: ', pets) // optional, if you would like to view the shape of the data
+  this.setState({ pets: pets.data.listPets.items })
+}
+```
+
+In the render method, we can now display the data to the UI:
+
+```js
+{
+  this.state.pets.map((pet, index) => (
+    <h2 key={index}>{pet.name}</h2>
+  ))
+}
+```
+
+The final component code for accessing the AWS AppSync API should look like this:
+
+```js
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+import { API, graphqlOperation } from 'aws-amplify'
+
+const ListPets = `
+  query {
+    listPets {
+      items {
+        id
+        name
+      }
+    }
+  }
+`
+
+class App extends Component {
+  state = { pets: [] }
+  async componentDidMount() {
+    const pets = await API.graphql(graphqlOperation(ListPets))
+    console.log('pets: ', pets)
+    this.setState({ pets: pets.data.listPets.items })
+  }
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        <p className="App-intro">
+          To get started, edit <code>src/App.js</code> and save to reload.
+        </p>
+        {
+          this.state.pets.map((pet, index) => (
+            <h2 key={index}>{pet.name}</h2>
+          ))
+        }
+      </div>
+    );
+  }
+}
+
+export default App;
+```
