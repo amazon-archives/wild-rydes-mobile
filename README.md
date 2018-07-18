@@ -377,11 +377,11 @@ Fromt here, click on the __AmplifyReact__ API to open it in the console.
 
 #### ⚡ Configuring the API
 
-Now we need to update the schema to our new schema.
+Now we need to update the existing schema to our new schema.
 
 Click on __Schema__ in the left hand menu to open the schema editor.
 
-Here, delete the exsing schema and add the following, then click __Save Schema__:
+Here, delete the existing schema and add the following, then click __Save Schema__:
 
 ```js
 type Pet {
