@@ -74,9 +74,9 @@ After running the above command you will have a few options:
 Now that the project is successfully created, we need to install the proper version of the AWS Amplify React package:
 
 ```bash
-npm install aws-amplify-react@0.1.54
+npm install aws-amplify-react@0.1.54 aws-amplify@0.4.8
 // or
-yarn add aws-amplify-react@0.1.54
+yarn add aws-amplify-react@0.1.54 aws-amplify@0.4.8
 ```
 
 Now, we can view it in the AWS Console by running the following command:
