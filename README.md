@@ -23,11 +23,16 @@ awsmobile configure
 
 The design team has dropped the final version of the web site, but has not set up web hosting.  In this lesson, we will quickly set up a scalable web site with global reach and deploy the code to the web site.
 
-Clone the project & change into the directory:
+Downloaed the project & change into the directory:
 
-```
-git clone https://github.com/aws-samples/wild-rydes-mobile
-cd wild-rydes-mobile
+![](https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/downloadss.png)
+
+__Because this is such a large project, it is recommended that you manually download to Desktop vs clone, but it is up to you__
+
+Next, change into the new directory:
+
+```bash
+cd ~/Downloads/wild-rydes-mobile-master
 ```
 
 Install the dependencies using npm or yarn:
@@ -54,7 +59,15 @@ For the questions:
 
 The AWS Mobile Hub project will be created.
 
-__To run the projecte locally:__
+Next, we need to install the proper version of `aws-amplify-react`:
+
+```bash
+npm install aws-amplify-react@0.1.54
+// or
+yarn add aws-amplify-react@0.1.54
+```
+
+__To run the project locally:__
 
 Run the project locally using either npm or yarn: 
 
