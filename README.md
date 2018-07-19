@@ -6,11 +6,7 @@ Welcome to the Wild Rydes React Native project. In this project, we will take yo
 
 To get started, we'll need to clone the repo and install the dependencies.
 
-1. Clone the repo   
-
-```bash
-git clone https://github.com/aws-samples/wild-rydes-mobile.git
-```
+1. Download the repo
 
 2. Change into the new directory   
 
@@ -18,13 +14,7 @@ git clone https://github.com/aws-samples/wild-rydes-mobile.git
 cd wild-rydes-mobile
 ```
 
-3. Check out the __react-native__ branch   
-
-```bash
-git checkout react-native
-```
-
-4. Install the dependencies   
+3. Install the dependencies   
 
 ```
 npm install
@@ -32,7 +22,7 @@ npm install
 yarn
 ```
 
-5. Run the project   
+4. Run the project   
 
 ```bash
 react-native run-ios
