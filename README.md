@@ -93,10 +93,11 @@ We'll also learn how to add a new service, [Amazon Cognito](https://aws.amazon.c
 
 #### ⚡ Configuring the project with `Amplify` & `aws-exports.js`
 
-1. Open __index.js__
+1. Open __src/index.js__
 2. Add the following code below the last `import` statement
 
 ```js
+// src/index.js
 import Amplify from 'aws-amplify'
 import config from './aws-exports'
 Amplify.configure(config)
@@ -126,12 +127,12 @@ Now, in the list of __Backend__ services, we see that __User Signin__ is now ena
 
 #### ⚡ Implementing User-signup & User-signin using the `withAuthenticator` HOC
 
-1. Open App.js
+1. Open src/App.js
 
 2. Import the `withAuthenticator` HOC from `aws-amplify-react`
 
 ```js
-// App.js
+// src/App.js
 
 import { withAuthenticator } from 'aws-amplify-react'
 ```
@@ -197,10 +198,10 @@ awsmobile cloud-api enable -p
 
 #### ⚡ Interacting with the Lambda function using AWS Amplify
 
-1. In App.js, add the following below the last import
+1. In src/App.js, add the following below the last import
 
 ```js
-// App.js
+// src/App.js
 import { API } from 'aws-amplify'
 
 let apiName = 'PetAPI';
@@ -310,10 +311,10 @@ Analytics.record({ name: 'Added socks to shopping cart', attributes: { username:
 
 Let's create a button that records an event.
 
-In App.js, import the `Analytics` module:
+In src/App.js, import the `Analytics` module:
 
 ```js
-// App.js
+// src/App.js
 import { Analytics } from 'aws-amplify'
 ```
 
@@ -431,10 +432,10 @@ query list {
 
 Now that the API is created & working properly, let's go ahead and query for data from the client & show it in the UI.
 
-In App.js, let's go ahead and import __API__ & __graphqlOperation__ from 'aws-amplify':
+In src/App.js, let's go ahead and import __API__ & __graphqlOperation__ from 'aws-amplify':
 
 ```js
-// App.js
+// src/App.js
 import { API, graphqlOperation } from 'aws-amplify'
 ```
 
@@ -479,7 +480,7 @@ In the render method, we can now display the data to the UI:
 }
 ```
 
-The final component code for accessing the AWS AppSync API should look like this:
+The final component code for querying the AWS AppSync API should look like this:
 
 ```js
 import React, { Component } from 'react';
@@ -528,3 +529,57 @@ class App extends Component {
 
 export default App;
 ```
+
+#### ⚡ Creating a mutation
+
+First, we need to create a mutation:
+
+```js
+const CreatePet = `
+  mutation($name: String!) {
+    createPet(input: {
+      name: $name
+    }) {
+      id
+    }
+  }
+`
+```
+
+Now we need to store some state in the class to keep up with user input:
+
+```js
+state = { name: '', pets: [] }
+```
+
+Next, we'll create an `onChange` class method that will handle user input, storing it in the state:
+
+```js
+onChange = (e) => { this.setState({ name: e.target.value }) }
+```
+
+Now, we'll create a class method that will call the API to create the mutation:
+
+```js
+createPet = () => {
+  const pet = { name: this.state.name }
+  API.graphql(graphqlOperation(CreatePet, pet))
+  const pets = [...this.state.pets, pet]
+  this.setState({ pets, name: '' })
+}
+```
+
+Finally, in the render method we'll create a button & input form to work with the new methods:
+
+```js
+<input onChange={this.onChange} placeholder='Pet name' />
+<button onClick={this.createPet}>Create Pet</button>
+```
+
+## Deleting resources
+
+Throughout this tutorial, we've created a few resources in your AWS account. If you are interested in removing any resources you will not be using in the future, here are the resources you should delete around this project:
+
+1. In Mobile hub, delete the new project we created here
+2. In Amazon s3, delete the bucket associated with this project
+3. In AWS AppSync, delete the API we created along with this project
