@@ -59,14 +59,6 @@ For the questions:
 
 The AWS Mobile Hub project will be created.
 
-Next, we need to install the proper version of `aws-amplify-react`:
-
-```bash
-npm install aws-amplify-react@0.1.54
-// or
-yarn add aws-amplify-react@0.1.54
-```
-
 __To run the project locally:__
 
 Run the project locally using either npm or yarn: 
